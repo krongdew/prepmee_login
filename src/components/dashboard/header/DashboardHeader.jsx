@@ -20,9 +20,9 @@ export default function DashboardHeader() {
                   <div className="dashboard_header_logo position-relative me-2 me-xl-5">
                     <Link href="/" className="logo">
                       <Image
-                        height={40}
-                        width={133}
-                        src="/images/header-logo-dark.svg"
+                        height={100}
+                        width={200}
+                        src="/images/about/prepmeelogo.svg"
                         alt="logo"
                       />
                     </Link>
@@ -175,10 +175,9 @@ export default function DashboardHeader() {
                               alt="testimonials"
                             />
                             <div className="details ml15">
-                              <p className="dark-color fw500 mb-2">Ali Tufan</p>
+                              <p className="dark-color fw500 mb-2">Name</p>
                               <p className="text mb-2">
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipiscing.
+                              
                               </p>
                               <p className="mb-0 text-thm">4 hours ago</p>
                             </div>

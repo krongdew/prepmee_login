@@ -85,11 +85,11 @@ export default function Header20() {
                                         </a>
                                         <Link
                                             className={`login-info mx15-lg mx30 ${
-                                                path === "/become-seller"
+                                                path === "/applytoteach"
                                                     ? "ui-active"
                                                     : ""
                                             }`}
-                                            href="/become-seller"
+                                            href="/applytoteach"
                                         >
                                             <span className="d-none d-xl-inline-block">
                                                 Become a

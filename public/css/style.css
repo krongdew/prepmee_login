@@ -3256,6 +3256,8 @@ li {
 /*	Home 13 Banner */
 .hero-home13 {
   background-image: url(../images/background/home13-hero-bg.png);
+  background-repeat: no-repeat;
+  background-size: cover;
   display: flex;
   align-items: center;
   height: 860px;

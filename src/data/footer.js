@@ -26,7 +26,7 @@ export const support = [
   { id: 4, name: "Buying on Freeio", path: "/" },
 ];
 
-
+export const money = ["US$ USD", "Euro", "Pound"];
 export const lan = ["English", "Thai"];
 
 export const footer = [

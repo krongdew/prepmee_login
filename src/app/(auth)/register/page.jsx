@@ -86,7 +86,7 @@ export default function page() {
                                             className="ud-btn btn-thm default-box-shadow2"
                                             type="button"
                                         >
-                                            Creat Account{" "}
+                                            Create Account{" "}
                                             <i className="fal fa-arrow-right-long" />
                                         </button>
                                     </div>

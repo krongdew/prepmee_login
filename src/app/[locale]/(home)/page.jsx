@@ -12,14 +12,15 @@ import Header20 from "@/components/header/Header20";
 import Footer8 from "@/components/footer/Footer8";
 
 
-export default function page() {
+export default function page({params}) {
     return (
         <>
             <div className="wrapper ovh">
-                <Header20 />
-           
+            <Header20 params={params} />
+          
                 <div className="body_content">
-                    <Hero13 />
+                <Hero13 params={params} />
+           
                     <BrowserCategory13 />
                     <TrendingService13 />
                     <NeedSomething2 />

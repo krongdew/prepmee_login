@@ -1,0 +1,36 @@
+{
+    "Common": {
+    "nav": {
+      "become_prefix": "Become a",
+      "become_tutor": "Tutor",
+      "signin": "Sign in",
+      "join": "Join"
+    }
+  },
+    "hero": {
+      "tag": "Get Started",
+      "title": "Find the best tutors",
+      "subtitle": "online and onsite",
+      "description": "Whatever you want to learn the most out of your time and cost",
+      "search_placeholder": "Search...",
+      "choose_category": "Choose Category",
+      "search_button": "Search",
+      "categories": {
+        "science": "Science, Biology & Chemistry",
+        "languages": "Languages",
+        "math": "Math & Physics",
+        "it": "IT & Coding",
+        "art": "Art & Craft",
+        "music": "Music",
+        "test_prep": "Test Prep"
+      },
+      "facts": {
+        "Total Freelancer": "Total Freelancer",
+        "Positive Review": "Positive Review",
+        "Projects Completed": "Projects Completed",
+        "Team Members": "Team Members"
+      },
+      "proof_quality": "Proof of quality",
+      "quality_description": "Lorem Ipsum Dolar Amet"
+    }
+  }

@@ -3,34 +3,46 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+// import usePathname useRouter useTranslations
+import { usePathname, useRouter } from "next/navigation";
+import { useTranslations } from 'next-intl';
 import Mega from "./Mega";
 import Navigation from "./Navigation";
 import MobileNavigation2 from "./MobileNavigation2";
 
 const LanguageSwitcher = () => {
-  const [lang, setLang] = useState('en');
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const switchLanguage = () => {
+    // ดึงภาษาปัจจุบันจาก path
+    const currentLang = pathname.split('/')[1];
+    const newLang = currentLang === 'en' ? 'th' : 'en';
+    const newPath = pathname.replace(`/${currentLang}`, `/${newLang}`);
+    router.push(newPath);
+  };
 
   return (
     <button 
-      onClick={() => setLang(lang === 'en' ? 'th' : 'en')}
+      onClick={switchLanguage}
       className="ud-btn btn-thm2 add-joining ml-4"
       style={{ minWidth: '60px' }}
     >
-      {lang === 'en' ? 'TH' : 'ENG'}
+       {pathname.startsWith('/en') ? 'TH' : 'ENG'}
     </button>
   );
 };
 
 export default function Header20() {
-    const path = usePathname();
+    const pathname = usePathname();
     const [hasMounted, setHasMounted] = useState(false);
+    const currentLocale = pathname.split('/')[1] || 'th';
+    const t = useTranslations('Common');
 
     useEffect(() => {
         setHasMounted(true);
     }, []);
 
-    // This ensures we only render once mounted on client
     if (!hasMounted) {
         return null;
     }
@@ -57,7 +69,7 @@ export default function Header20() {
                                     <div className="d-flex align-items-center">
                                         <Link
                                             className="header-logo bdrr1 pr30 pr5-xl"
-                                            href="/"
+                                            href={`/${currentLocale}`}
                                         >
                                             <Image
                                                 height={40}
@@ -85,30 +97,30 @@ export default function Header20() {
                                         </a>
                                         <Link
                                             className={`login-info mx15-lg mx30 ${
-                                                path === "/applytoteach"
+                                                pathname === `/${currentLocale}/applytoteach`
                                                     ? "ui-active"
                                                     : ""
                                             }`}
-                                            href="/applytoteach"
+                                            href={`/${currentLocale}/applytoteach`}
                                         >
                                             <span className="d-none d-xl-inline-block">
-                                                Become a
+                                                {t('nav.become_prefix')}
                                             </span>{" "}
-                                            Tutor
+                                            {t('nav.become_tutor')}
                                         </Link>
                                         <Link
                                             className={`login-info mr15-lg mr30 ${
-                                                path === "/login" ? "ui-active" : ""
+                                                pathname === `/${currentLocale}/login` ? "ui-active" : ""
                                             }`}
-                                            href="/login"
+                                            href={`/${currentLocale}/login`}
                                         >
-                                            Sign in
+                                            {t('nav.signin')}
                                         </Link>
                                         <Link
                                             className="ud-btn btn-thm add-joining"
-                                            href="/register"
+                                            href={`/${currentLocale}/register`}
                                         >
-                                            Join
+                                            {t('nav.join')}
                                         </Link>
                                         <LanguageSwitcher />
                                     </div>
@@ -120,7 +132,7 @@ export default function Header20() {
             </div>
 
             <div className="mobile-only">
-                <MobileNavigation2 />
+                <MobileNavigation2 currentLocale={currentLocale} />
             </div>
         </>
     );

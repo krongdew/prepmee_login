@@ -29,7 +29,7 @@ export default function Hero13({ params }) {
     'categories.test_prep',
   ];
 
-  const popular = ["Math", "English", "Thai", "Physics", "Chemistry", "Python"];
+  const popular = ["Math", "English", "Thai", "Physics", "Chemistry", "Coding"];
 
   const roleHandler = (select) => {
     setSelectedRole(select);

@@ -9,7 +9,7 @@ export default function page() {
             <div className="bgc-thm4">
                 <Header20 />
                 <Applytoteach />
-       
+    
                 <Footer8 />
             </div>
         </>

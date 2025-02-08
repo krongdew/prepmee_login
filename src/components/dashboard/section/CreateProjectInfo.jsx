@@ -1,7 +1,6 @@
 "use client";
 import DashboardNavigation from "../header/DashboardNavigation";
 import BasicInformation2 from "./BasicInformation2";
-import UploadAttachment from "./UploadAttachment";
 
 export default function CreateProjectInfo() {
   return (
@@ -13,8 +12,8 @@ export default function CreateProjectInfo() {
           </div>
           <div className="col-lg-9">
             <div className="dashboard_title_area">
-              <h2>Creat Project</h2>
-              <p className="text">Lorem ipsum dolor sit amet, consectetur.</p>
+              <h2>Add Subject</h2>
+              <p className="text">Add subject and detail</p>
             </div>
           </div>
           <div className="col-lg-3">
@@ -29,7 +28,7 @@ export default function CreateProjectInfo() {
         <div className="row">
           <div className="col-xl-12">
             <BasicInformation2 />
-            <UploadAttachment />
+        
           </div>
         </div>
       </div>

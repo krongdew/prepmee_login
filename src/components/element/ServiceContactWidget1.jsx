@@ -17,8 +17,8 @@ export default function ServiceContactWidget1() {
             <span className="online" />
           </div>
           <div className="ml20">
-            <h5 className="title mb-1">Kristin Watson</h5>
-            <p className="mb-0">Dog Trainer</p>
+            <h5 className="title mb-1">Kru DeeDee</h5>
+            <p className="mb-0">Math Tutor</p>
             <div className="review">
               <p>
                 <i className="fas fa-star fz10 review-color pr10" />
@@ -31,25 +31,31 @@ export default function ServiceContactWidget1() {
         <div className="details">
           <div className="fl-meta d-flex align-items-center justify-content-between">
             <a className="meta fw500 text-start">
-              Location
-              <br />
-              <span className="fz14 fw400">London</span>
-            </a>
-            <a className="meta fw500 text-start">
               Rate
               <br />
-              <span className="fz14 fw400">$90 / hr</span>
+              <span className="fz14 fw400">350/hr</span>
             </a>
             <a className="meta fw500 text-start">
-              Job Success
+              Tool
               <br />
-              <span className="fz14 fw400">%98</span>
+              <span className="fz14 fw400">Zoom</span>
+            </a>
+            <a className="meta fw500 text-start">
+              Total Hours
+              <br />
+              <span className="fz14 fw400">200</span>
             </a>
           </div>
         </div>
         <div className="d-grid mt30">
           <Link href="/freelancer-single" className="ud-btn btn-thm-border">
-            Contact Me
+            Book Me
+            <i className="fal fa-arrow-right-long" />
+          </Link>
+        </div>
+        <div className="d-grid mt30">
+          <Link href="/freelancer-single" className="ud-btn btn-thm-border">
+            Chat
             <i className="fal fa-arrow-right-long" />
           </Link>
         </div>

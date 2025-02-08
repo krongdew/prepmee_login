@@ -7,15 +7,16 @@ export default function ConfirmPassword() {
         <div className="col-lg-7">
           <div className="row">
             <div className="bdrb1 pb15 mb25">
-              <h5 className="list-title">Change password</h5>
+              <h5 className="list-title">Close Account</h5>
             </div>
             <form className="form-style1">
               <div className="row">
                 <div className="col-sm-12">
                   <h6>Close account</h6>
                   <p className="text">
-                    Warning: If you close your account, you will be unsubscribed
-                    from all your 5 courses, and will lose access forever.
+                    Warning: If you close your account, you lose all your balance and information.
+                    If you want to keep your balance, please contact us.
+          
                   </p>
                 </div>
                 <div className="col-sm-6">
@@ -31,7 +32,7 @@ export default function ConfirmPassword() {
                   </div>
                   <div className="text-start">
                     <Link className="ud-btn btn-thm" href="/contact">
-                      Change Password
+                      Close Account
                       <i className="fal fa-arrow-right-long" />
                     </Link>
                   </div>

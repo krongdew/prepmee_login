@@ -82,13 +82,13 @@ export default function ProfileDetails() {
           <div className="profile-box d-sm-flex align-items-center mb30">
             <div className="profile-img mb20-sm">
               <Image
-                height={71}
-                width={71}
+                height={120}
+                width={120}
                 className="rounded-circle wa-xs"
                 src={selectedImage ? selectedImage : "/images/team/fl-1.png"}
                 style={{
-                  height: "71px",
-                  width: "71px",
+                  height: "120px",
+                  width: "120px",
                   objectFit: "cover",
                 }}
                 alt="profile"
@@ -130,7 +130,7 @@ export default function ProfileDetails() {
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="i will"
+                    placeholder="username"
                   />
                 </div>
               </div>
@@ -142,51 +142,12 @@ export default function ProfileDetails() {
                   <input
                     type="email"
                     className="form-control"
-                    placeholder="i will"
+                    placeholder="@"
                   />
                 </div>
               </div>
-              <div className="col-sm-6">
-                <div className="mb20">
-                  <label className="heading-color ff-heading fw500 mb10">
-                    Phone Number
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="i will"
-                  />
-                </div>
-              </div>
-              <div className="col-sm-6">
-                <div className="mb20">
-                  <label className="heading-color ff-heading fw500 mb10">
-                    Tagline
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="i will"
-                  />
-                </div>
-              </div>
-              <div className="col-sm-6">
-                <div className="mb20">
-                  <SelectInput
-                    label="Hourly Rate"
-                    defaultSelect={getHourly}
-                    data={[
-                      { option: "$50", value: "50" },
-                      { option: "$60", value: "60" },
-                      { option: "$70", value: "70" },
-                      { option: "$80", value: "80" },
-                      { option: "$90", value: "90" },
-                      { option: "$100", value: "100" },
-                    ]}
-                    handler={hourlyHandler}
-                  />
-                </div>
-              </div>
+      
+            
               <div className="col-sm-6">
                 <div className="mb20">
                   <SelectInput
@@ -204,78 +165,8 @@ export default function ProfileDetails() {
                   />
                 </div>
               </div>
-              <div className="col-sm-6">
-                <div className="mb20">
-                  <SelectInput
-                    label="Specialization"
-                    defaultSelect={getSpecialization}
-                    data={[
-                      { option: "Male", value: "male" },
-                      {
-                        option: "Female",
-                        value: "female",
-                      },
-                      { option: "Other", value: "other" },
-                    ]}
-                    handler={specializationHandler}
-                  />
-                </div>
-              </div>
-              <div className="col-sm-6">
-                <div className="mb20">
-                  <SelectInput
-                    label="Type"
-                    defaultSelect={getType}
-                    data={[
-                      {
-                        option: "Type 1",
-                        value: "type-1",
-                      },
-                      {
-                        option: "Type 2",
-                        value: "type-2",
-                      },
-                      {
-                        option: "Type 3",
-                        value: "type-3",
-                      },
-                    ]}
-                    handler={typeHandler}
-                  />
-                </div>
-              </div>
-              <div className="col-sm-6">
-                <div className="mb20">
-                  <SelectInput
-                    label="Country"
-                    defaultSelect={getCountry}
-                    data={[
-                      {
-                        option: "United States",
-                        value: "usa",
-                      },
-                      {
-                        option: "Canada",
-                        value: "canada",
-                      },
-                      {
-                        option: "United Kingdom",
-                        value: "uk",
-                      },
-                      {
-                        option: "Australia",
-                        value: "australia",
-                      },
-                      {
-                        option: "Germany",
-                        value: "germany",
-                      },
-                      { option: "Japan", value: "japan" },
-                    ]}
-                    handler={countryHandler}
-                  />
-                </div>
-              </div>
+        
+            
               <div className="col-sm-6">
                 <div className="mb20">
                   <SelectInput
@@ -308,60 +199,7 @@ export default function ProfileDetails() {
                   />
                 </div>
               </div>
-              <div className="col-sm-6">
-                <div className="mb20">
-                  <SelectInput
-                    label="Language"
-                    defaultSelect={getLanguage}
-                    data={[
-                      {
-                        option: "English",
-                        value: "english",
-                      },
-                      {
-                        option: "French",
-                        value: "french",
-                      },
-                      {
-                        option: "German",
-                        value: "german",
-                      },
-                      {
-                        option: "Japanese",
-                        value: "japanese",
-                      },
-                    ]}
-                    handler={languageHandler}
-                  />
-                </div>
-              </div>
-              <div className="col-sm-6">
-                <div className="mb20">
-                  <SelectInput
-                    label="Languages Level"
-                    defaultSelect={getLanLevel}
-                    data={[
-                      {
-                        option: "Beginner",
-                        value: "beginner",
-                      },
-                      {
-                        option: "Intermediate",
-                        value: "intermediate",
-                      },
-                      {
-                        option: "Advanced",
-                        value: "advanced",
-                      },
-                      {
-                        option: "Fluent",
-                        value: "fluent",
-                      },
-                    ]}
-                    handler={lanLevelHandler}
-                  />
-                </div>
-              </div>
+             
               <div className="col-md-12">
                 <div className="mb10">
                   <label className="heading-color ff-heading fw500 mb10">

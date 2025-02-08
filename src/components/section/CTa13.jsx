@@ -18,10 +18,10 @@ export default function CTa13() {
                 Reach thousands of students
               </p>
               <Link
-                href="/contact"
+                href="/applytoteach"
                 className="ud-btn btn-dark default-box-shadow1"
               >
-                Get Started <i className="fal fa-arrow-right-long"></i>
+                Apply to teach<i className="fal fa-arrow-right-long"></i>
               </Link>
             </div>
           </div>

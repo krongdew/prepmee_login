@@ -19,14 +19,14 @@ export default function TrendingService15() {
 
   return (
     <>
-      <section className="pb90 pb30-md ">
+      <section className="pb90 pb30-md pt30">
         <div className="container">
           <div className="row align-items-center wow fadeInUp">
             <div className="col-lg-9">
               <div className="main-title">
-                <h2 className="title">Trending Services</h2>
+                <h2 className="title">Trending Now</h2>
                 <p className="paragraph">
-                  Most viewed and all-time top-selling services
+                  Check out Newly Joined Tutors
                 </p>
               </div>
             </div>

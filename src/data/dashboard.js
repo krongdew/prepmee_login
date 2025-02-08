@@ -1,15 +1,15 @@
 export const dasboardNavigation = [
   {
     id: 1,
-    name: "เปลี่ยนเป็น My Lessons แทน Dashboard",
+    name: " My Lessons",
     icon: "flaticon-home",
     path: "/dashboard",
   },
   {
     id: 2,
-    name: "เป็น Manage Calendar แทน My Proposals และเอาไว้ใน Tutor Menu",
-    icon: "flaticon-document",
-    path: "/proposal",
+    name: "Messages",
+    icon: "flaticon-chat",
+    path: "/message",
   },
   {
     id: 3,
@@ -17,74 +17,49 @@ export const dasboardNavigation = [
     icon: "flaticon-like",
     path: "/saved",
   },
+
+
   {
     id: 4,
-    name: "Messages",
-    icon: "flaticon-chat",
-    path: "/message",
-  },
-  {
-    id: 5,
-    name: "ไม่เอาReviews",
-    icon: "flaticon-review-1",
-    path: "/reviews",
-  },
-  {
-    id: 6,
-    name: "ใช้เป็นหน้า Payouts แทน Invoice",
+    name: "Receipt",
     icon: "flaticon-receipt",
     path: "/invoice",
   },
   {
-    id: 7,
-    name: "เปลี่ยนเป็นหน้า Balance แทน Payouts",
+    id: 5,
+    name: "Balance",
     icon: "flaticon-dollar",
-    path: "/payouts",
+    path: "/balance",
+  },
+  {
+    id: 6,
+    name: "Manage Schedule",
+    icon: "flaticon-calendar",
+    path: "/tutorschedule",
+  },
+  {
+    id: 7,
+    name: "Manage Subjects",
+    icon: "flaticon-content",
+    path: "/manage-subjects",
   },
   {
     id: 8,
-    name: "ไม่เอาStatements",
+    name: "Statement & Payout",
     icon: "flaticon-web",
     path: "/statements",
   },
+
+
+ 
   {
     id: 9,
-    name: "ไม่เอาManage Services",
-    icon: "flaticon-presentation",
-    path: "/manage-services",
-  },
-  {
-    id: 10,
-    name: "ไม่เอาManage Jobs",
-    icon: "flaticon-briefcase",
-    path: "/manage-jobs",
-  },
-  {
-    id: 11,
-    name: "Manage Subjects",
-    icon: "flaticon-content",
-    path: "/manage-projects",
-  },
-  {
-    id: 12,
-    name: "ไม่เอาAdd Services",
-    icon: "flaticon-document",
-    path: "/add-services",
-  },
-  {
-    id: 13,
-    name: "ไม่เอาCreate Project",
-    icon: "flaticon-content",
-    path: "/create-projects",
-  },
-  {
-    id: 14,
     name: "My Profile",
     icon: "flaticon-photo",
     path: "/my-profile",
   },
   {
-    id: 15,
+    id: 10,
     name: "Logout",
     icon: "flaticon-logout",
     path: "/login",

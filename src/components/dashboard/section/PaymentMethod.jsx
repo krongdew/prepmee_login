@@ -2,22 +2,35 @@
 import { useState } from "react";
 import PayoutForm from "../element/PayoutForm";
 
-const method = ["Paypal", "Bank Transfer", "Payoneer"];
+const thaiBanks = [
+  'ธนาคารกรุงเทพ (BBL)',
+  'ธนาคารกสิกรไทย (KBANK)',
+  'ธนาคารกรุงไทย (KTB)',
+  'ธนาคารไทยพาณิชย์ (SCB)',
+  'ธนาคารกรุงศรีอยุธยา (BAY)',
+  'ธนาคารทหารไทยธนชาต (TTB)',
+  'ธนาคารเกียรตินาคิน (KKP)',
+  'ธนาคารซีไอเอ็มบีไทย (CIMB)',
+  'ธนาคารทิสโก้ (TISCO)',
+  'ธนาคารยูโอบี (UOB)',
+  'ออมสิน (GSB)',
+];
 
 export default function PaymentMethod() {
-  const [methodSelect, setMethodSelect] = useState("Paypal");
+  const [selectedBank, setSelectedBank] = useState(thaiBanks[0]);
 
   // handler
-  const methodHandler = (data) => {
-    setMethodSelect(data);
+  const bankHandler = (bank) => {
+    setSelectedBank(bank);
   };
+
   return (
     <>
       <div className="bdrb1 pb15">
-        <h5 className="list-title">Payout Methods</h5>
+        <h5 className="list-title">Payment Detail</h5>
       </div>
       <div className="widget-wrapper mt35">
-        <h6 className="list-title mb10">Select default payout method</h6>
+        <h6 className="list-title mb10">Select Bank</h6>
         <div className="bootselect-multiselect">
           <div className="dropdown bootstrap-select">
             <button
@@ -28,23 +41,23 @@ export default function PaymentMethod() {
               <div className="filter-option">
                 <div className="filter-option-inner">
                   <div className="filter-option-inner-inner">
-                    {methodSelect}
+                    {selectedBank}
                   </div>
-                </div>{" "}
+                </div>
               </div>
             </button>
-            <div className="dropdown-menu ">
+            <div className="dropdown-menu">
               <div className="inner show">
                 <ul className="dropdown-menu inner show">
-                  {method.map((item, i) => (
-                    <li key={i} className="selected active">
+                  {thaiBanks.map((bank, i) => (
+                    <li key={i} className={selectedBank === bank ? "selected active" : ""}>
                       <a
                         className={`dropdown-item ${
-                          methodSelect === item ? "selected active" : ""
+                          selectedBank === bank ? "selected active" : ""
                         }`}
-                        onClick={() => methodHandler(item)}
+                        onClick={() => bankHandler(bank)}
                       >
-                        <span className="text">{item}</span>
+                        <span className="text">{bank}</span>
                       </a>
                     </li>
                   ))}
@@ -54,25 +67,11 @@ export default function PaymentMethod() {
           </div>
         </div>
       </div>
-      <h5 className="mb15">Payout Details</h5>
+      <h5 className="mb15">Bank Detail</h5>
       <div className="navpill-style1 payout-style">
-        <ul className="nav nav-pills align-items-center justify-content-center mb30">
-          {method.map((item, i) => (
-            <li key={i} className="nav-item">
-              <button
-                className={`nav-link fw500 dark-color ${
-                  methodSelect === item ? "active" : ""
-                }`}
-                onClick={() => methodHandler(item)}
-              >
-                {item}
-              </button>
-            </li>
-          ))}
-        </ul>
-        {methodSelect === "Paypal" && <PayoutForm />}
-        {methodSelect === "Bank Transfer" && <PayoutForm />}
-        {methodSelect === "Payoneer" && <PayoutForm />}
+        <div className="bank-details">
+          <PayoutForm selectedBank={selectedBank} />
+        </div>
       </div>
     </>
   );

@@ -18,7 +18,7 @@ export default function MobileNavigation3() {
                   />
                 </Link>
                 <div className="right-side text-end">
-                  <Link href="/login">join</Link>
+                  <Link href="/login">Join</Link>
                   <a
                     className="menubar ml30"
                     data-bs-toggle="offcanvas"

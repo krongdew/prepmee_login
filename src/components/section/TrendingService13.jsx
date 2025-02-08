@@ -24,10 +24,7 @@ export default function TrendingService13() {
           <div className="row align-items-center wow fadeInUp">
             <div className="col-lg-9">
               <div className="main-title">
-                <h2 className="title">New Tutors </h2>
-                <p className="paragraph">
-                  Newly Joined Tutors 
-                </p>
+                <h2 className="title">New Tutors</h2>
               </div>
             </div>
             <div className="col-lg-3">
@@ -44,35 +41,47 @@ export default function TrendingService13() {
               <div className="position-relative">
                 {showSwiper && (
                   <Swiper
-                    slidesPerView={4}
-                    spaceBetween={30}
+                    slidesPerView={6}
+                    spaceBetween={15}
                     freeMode={true}
-                    // loop={true}
                     className="mySwiper"
                     navigation={{
                       prevEl: ".prev-btn",
                       nextEl: ".next-btn",
                     }}
-                    style={{ overflow: "visible" }}
+                    style={{ 
+                      overflow: "visible",
+                      padding: "0 10px"  // Add padding for better visibility
+                    }}
                     modules={[Navigation]}
                     breakpoints={{
                       0: {
-                        slidesPerView: 1,
+                        slidesPerView: 2,
+                        spaceBetween: 10
+                      },
+                      576: {
+                        slidesPerView: 3,
+                        spaceBetween: 10
                       },
                       768: {
-                        slidesPerView: 2,
+                        slidesPerView: 4,
+                        spaceBetween: 15
                       },
                       992: {
-                        slidesPerView: 3,
+                        slidesPerView: 5,
+                        spaceBetween: 15
                       },
                       1200: {
-                        slidesPerView: 4,
+                        slidesPerView: 6,
+                        spaceBetween: 15
                       },
                     }}
                   >
-                    {product1.map((item,i) => (
-                      <SwiperSlide key={ i }>
-                        <TrendingServiceCard1 data={item} />
+                    {product1.map((item, i) => (
+                      <SwiperSlide key={i} className="p-1">
+                        <div style={{ transform: 'scale(0.9)' }}>
+                          <TrendingServiceCard1 data={item} />
+                        </div>
                       </SwiperSlide>
                     ))}
                   </Swiper>

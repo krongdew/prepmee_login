@@ -27,7 +27,7 @@ export default function Page() {
 
   const teachingModes = [
     { id: 'online', label: 'Online Teaching' },
-    { id: 'onsite', label: 'Onsite Teaching' }
+    { id: 'onsite', label: 'On-site Teaching' }
   ];
 
   const provinces = [

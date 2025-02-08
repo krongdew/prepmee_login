@@ -1,17 +1,15 @@
 
-
 import Hero13 from "@/components/hero/Hero13";
-import BrowserCategory13 from "@/components/section/BrowserCategory13";
 import NeedSomething2 from "@/components/section/NeedSomething2";
-import TrendingService13 from "@/components/section/TrendingService13";
+import TrendingService15 from "@/components/section/TrendingService15";
 import React from "react";
-
-
 import CTa13 from "@/components/section/CTa13";
 import Header20 from "@/components/header/Header20";
 import Footer8 from "@/components/footer/Footer8";
 
-
+export const metadata = {
+    title: "Home",
+};
 export default function page({params}) {
     return (
         <>
@@ -21,11 +19,8 @@ export default function page({params}) {
                 <div className="body_content">
                 <Hero13 params={params} />
            
-                    <BrowserCategory13 />
-                    <TrendingService13 />
+                    <TrendingService15 />
                     <NeedSomething2 />
-        
-            
                     <CTa13 />
                 </div>
                 <Footer8 />

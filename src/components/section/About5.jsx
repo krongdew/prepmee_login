@@ -27,30 +27,28 @@ export default function About5() {
                 data-wow-delay="300ms"
               >
                 <h2 className="mb25">
-                  Join World's Best Marketplace{" "}
-                  <br className="d-none d-xl-block" /> for Workers
+                  The Best Tutor Marketplace{" "}
+                  <br className="d-none d-xl-block" />
                 </h2>
                 <p className="text mb25">
-                  It is a long established fact that a reader will be distracted
-                  by the readable content of a page when looking at its layout.
-                  The point of using Lorem Ipsum is that it has a more-or-less
-                  normal distribution of letters, as opposed to using 'Content
-                  here, content here', making it look like readable English.
+               
+At Premee, we're transforming the way students connect with qualified tutors. Whether you're looking to excel in academics, master a new skill, or prepare for important exams, we make finding the perfect tutor seamless and stress-free.
+Your Learning Journey Made Simple
+Finding the right tutor shouldn't be complicated. That's why we've created a platform that handles everything from tutor discovery to scheduling and payments, letting you focus on what matters most - learning.
                 </p>
                 <div className="list-style2">
                   <ul className="mb20">
                     <li>
                       <i className="far fa-check" />
-                      Connect to freelancers with proven business experience
+                      Tutor Marketplace
                     </li>
                     <li>
                       <i className="far fa-check" />
-                      Get matched with the perfect talent by a customer success
-                      manager
+                      Handle Schedule
                     </li>
                     <li>
                       <i className="far fa-check" />
-                      Unmatched quality of remote, hybrid, and flexible jobs
+                      Handle Payment
                     </li>
                   </ul>
                 </div>
@@ -58,7 +56,7 @@ export default function About5() {
                   href="/freelancer-single"
                   className="ud-btn btn-thm-border"
                 >
-                  Find Talent
+                  Find Tutors
                   <i className="fal fa-arrow-right-long" />
                 </Link>
               </div>

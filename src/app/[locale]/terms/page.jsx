@@ -1,9 +1,9 @@
-import Footer from "@/components/footer/Footer";
+import Footer8 from "@/components/footer/Footer";
 import Header20 from "@/components/header/Header20";
 import TermsCondition1 from "@/components/section/TermsCondition1";
 
 export const metadata = {
-    title: "Freeio - Freelance Marketplace React/Next Js Template | Terms & Conditions",
+    title: "Terms & Conditions",
 };
 
 export default function page() {
@@ -11,7 +11,7 @@ export default function page() {
         <>
             <Header20 />
             <TermsCondition1 />
-            <Footer />
+            <Footer8 />
         </>
     );
 }

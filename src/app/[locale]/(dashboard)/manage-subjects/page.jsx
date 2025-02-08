@@ -1,9 +1,10 @@
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
-import DashboardInfo from "@/components/dashboard/section/DashboardInfo";
+import ManageProjectInfo from "@/components/dashboard/section/ManageSubjectInfo";
 import MobileNavigation2 from "@/components/header/MobileNavigation2";
 
 export const metadata = {
-  title: "Dashboard",
+  title:
+    "Manage Subjects",
 };
 
 export default function page() {
@@ -12,7 +13,7 @@ export default function page() {
     
     <MobileNavigation2 />
       <DashboardLayout>
-        <DashboardInfo />
+        <ManageProjectInfo />
       </DashboardLayout>
     </>
   );

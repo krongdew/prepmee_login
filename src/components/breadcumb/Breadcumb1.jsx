@@ -32,7 +32,7 @@ export default function Breadcumb1({ title, brief, isBtnActive }) {
                   <p className="text mb30 text-black">{brief}</p>
                   {isBtnActive && (
                     <Link className="ud-btn btn-thm" href="/contact">
-                      Become Seller
+                      Contact Us
                       <i className="fal fa-arrow-right-long" />
                     </Link>
                   )}

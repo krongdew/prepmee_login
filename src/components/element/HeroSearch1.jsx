@@ -2,12 +2,12 @@
 import { useState } from "react";
 
 const searchResult = [
-  "mobile app development",
-  "mobile app builder",
-  "mobile legends",
-  "mobile app ui ux design",
-  "mobile game app development",
-  "mobile app design",
+  "Math",
+  "English",
+  "Thai",
+  "Physics",
+  "Coding",
+  "TOEIC",
 ];
 
 export default function HeroSearch1() {

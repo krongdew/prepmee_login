@@ -54,7 +54,7 @@ export default function AllTimeSelling() {
             <div className="details">
               <h4 className="title mt10 mb-3">Still need help?</h4>
               <p className="text">
-                Contact Tutor Admin  {" "}
+                Chat with Tutor Admin  {" "}
                 <br className="d-none d-xxl-block" /> or Line Official @prepmee
               </p>
             </div>

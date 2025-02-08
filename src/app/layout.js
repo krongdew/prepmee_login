@@ -2,8 +2,8 @@
 import './globals.css'
 
 export const metadata = {
-  title: 'Next.js i18n',
-  description: 'Next.js i18n example',
+  title: 'Prepmee',
+  description: 'Prepmee',
 }
 
 export default function RootLayout({ children }) {

@@ -1,4 +1,4 @@
-import FooterSelect1 from "@/components/footer/ui/FooterSelect1";
+import FooterSelect2 from "@/components/footer/ui/FooterSelect2";
 
 export default function DashboardFooter() {
     return (
@@ -16,7 +16,7 @@ export default function DashboardFooter() {
                         </div>
                         <div className="col-auto">
                             <div className="footer_bottom_right_btns at-home8 text-center text-lg-end">
-                                <FooterSelect1 />
+                                <FooterSelect2 />
                             </div>
                         </div>
                     </div>

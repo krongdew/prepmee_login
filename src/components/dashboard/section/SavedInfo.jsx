@@ -8,7 +8,7 @@ import JobCard1 from "../card/JobCard1";
 import { product1, project1 } from "@/data/product";
 import { job1 } from "@/data/job";
 
-const tab = ["Services", "Project", "Jobs"];
+const tab = ["Saved Tutors"];
 
 export default function SavedInfo() {
   const [getCurrentTab, setCurrentTab] = useState(0);
@@ -23,7 +23,7 @@ export default function SavedInfo() {
           <div className="col-lg-12">
             <div className="dashboard_title_area">
               <h2>Saved</h2>
-              <p className="text">Lorem ipsum dolor sit amet, consectetur.</p>
+              <p className="text">View all your saved tutors here</p>
             </div>
           </div>
         </div>
@@ -57,32 +57,9 @@ export default function SavedInfo() {
                   </div>
                 )}
 
-                {/* projects tab */}
-                {getCurrentTab === 1 && (
-                  <div className="row">
-                    {project1.slice(0, 6).map((item,i) => (
-                      <div
-                        key={i}
-                        className="col-md-6 col-lg-12 col-xl-6"
-                      >
-                        <ProjectCard1 data={item} />
-                      </div>
-                    ))}
-                  </div>
-                )}
+                
 
-                {/* jobs tab */}
-                {getCurrentTab === 2 && (
-                  <div className="packages_table table-responsive">
-                    <table className="table-style3 table at-savesearch">
-                      <tbody className="t-body">
-                        {job1.slice(0, 4).map((item, i) => (
-                          <JobCard1 key={i} data={item} i={i} />
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                )}
+               
               </div>
 
               <Pagination1 />

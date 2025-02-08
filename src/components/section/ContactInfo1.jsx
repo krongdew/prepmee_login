@@ -7,22 +7,16 @@ export default function ContactInfo1() {
             <div className="col-lg-6">
               <div className="position-relative mt40">
                 <div className="main-title">
-                  <h4 className="form-title mb25">Keep In Touch With Us.</h4>
+                  <h4 className="form-title mb25">Keep In Touch With Us</h4>
                   <p className="text">
-                    Neque convallis a cras semper auctor. Libero id faucibus
-                    nisl tincidunt egetnvallis.
+                    Need help with finding tutors, transaction, corperate contact or others. 
+                    There are many ways you can contact us or leave message here. We'll contact you back shortly.
                   </p>
                 </div>
                 <div className="iconbox-style1 contact-style d-flex align-items-start mb30">
-                  <div className="icon flex-shrink-0">
-                    <span className="flaticon-tracking" />
-                  </div>
+                 
                   <div className="details">
-                    <h5 className="title">Address</h5>
-                    <p className="mb-0 text">
-                      328 Queensberry Street, North <br /> Melbourne VIC 3051,
-                      Australia.
-                    </p>
+                   
                   </div>
                 </div>
                 <div className="iconbox-style1 contact-style d-flex align-items-start mb30">
@@ -30,8 +24,8 @@ export default function ContactInfo1() {
                     <span className="flaticon-call" />
                   </div>
                   <div className="details">
-                    <h5 className="title">Phone</h5>
-                    <p className="mb-0 text">+(0) 392 94 03 01</p>
+                    <h5 className="title">Line Official</h5>
+                    <p className="mb-0 text">@prepmee</p>
                   </div>
                 </div>
                 <div className="iconbox-style1 contact-style d-flex align-items-start mb30">
@@ -40,14 +34,14 @@ export default function ContactInfo1() {
                   </div>
                   <div className="details">
                     <h5 className="title">Email</h5>
-                    <p className="mb-0 text">hello@freeio.com</p>
+                    <p className="mb-0 text">admin@prepmee.co</p>
                   </div>
                 </div>
               </div>
             </div>
             <div className="col-lg-6">
               <div className="contact-page-form default-box-shadow1 bdrs8 bdr1 p50 mb30-md bgc-white">
-                <h4 className="form-title mb25">Tell us about yourself</h4>
+                <h4 className="form-title mb25">Send us messages</h4>
                 <p className="text mb30">
                   Whether you have questions or you would just like to say
                   hello, contact us.
@@ -86,7 +80,7 @@ export default function ContactInfo1() {
                         <textarea
                           cols={30}
                           rows={6}
-                          placeholder="Description"
+                          placeholder="hi there"
                         />
                       </div>
                     </div>

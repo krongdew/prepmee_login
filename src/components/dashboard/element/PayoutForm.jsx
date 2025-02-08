@@ -8,75 +8,53 @@ export default function PayoutForm() {
           <div className="col-sm-6">
             <div className="mb20">
               <label className="heading-color ff-heading fw500 mb-1">
-                Bank Name
+                Account Name in English
               </label>
               <input
                 type="text"
                 className="form-control"
-                placeholder="creativelayers088@gmail.com"
+                placeholder="English Name"
               />
             </div>
           </div>
           <div className="col-sm-6">
             <div className="mb20">
               <label className="heading-color ff-heading fw500 mb-1">
-                Bank Account Number
+              Account Name in Thai
               </label>
               <input
                 type="text"
                 className="form-control"
-                placeholder="creativelayers088@gmail.com"
+                placeholder="ชื่อไทย"
               />
             </div>
           </div>
           <div className="col-sm-6">
             <div className="mb20">
               <label className="heading-color ff-heading fw500 mb-1">
-                Bank Account Holder Name
+                Bank Branch
               </label>
               <input
                 type="text"
                 className="form-control"
-                placeholder="creativelayers088@gmail.com"
+                placeholder="สาขา"
               />
             </div>
           </div>
+         
           <div className="col-sm-6">
             <div className="mb20">
               <label className="heading-color ff-heading fw500 mb-1">
-                Bank Routing Number
+                Account Number
               </label>
               <input
                 type="text"
                 className="form-control"
-                placeholder="creativelayers088@gmail.com"
+                placeholder="12345678"
               />
             </div>
           </div>
-          <div className="col-sm-6">
-            <div className="mb20">
-              <label className="heading-color ff-heading fw500 mb-1">
-                Bank IBAN
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="creativelayers088@gmail.com"
-              />
-            </div>
-          </div>
-          <div className="col-sm-6">
-            <div className="mb20">
-              <label className="heading-color ff-heading fw500 mb-1">
-                Swift Code
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="creativelayers088@gmail.com"
-              />
-            </div>
-          </div>
+       
         </div>
         <div className="row">
           <div className="col-md-12">

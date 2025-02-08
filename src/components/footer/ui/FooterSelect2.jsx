@@ -1,10 +1,9 @@
 "use client";
 import { lan } from "@/data/footer";
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function FooterSelect2() {
-
-    const [getLanSelect, setLanSelect] = useState("English");
+    const [getLanSelect, setLanSelect] = useState ("English");
 
     return (
         <>

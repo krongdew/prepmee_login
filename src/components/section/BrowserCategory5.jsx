@@ -9,7 +9,7 @@ import BrowserCategoryCard5 from "../card/BrowserCategoryCard5";
 export default function BrowserCategory5() {
   return (
     <>
-      <section className="pb70 pb30-md">
+      <section className="pb70 pb30-md pt40">
         <div className="container">
           <div
             className="row align-items-md-center wow fadeInUp"

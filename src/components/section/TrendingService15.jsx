@@ -19,7 +19,7 @@ export default function TrendingService15() {
 
   return (
     <>
-      <section className="pb90 pb30-md pt30">
+      <section className="pb90 pb30-md pt20">
         <div className="container">
           <div className="row align-items-center wow fadeInUp">
             <div className="col-lg-9">

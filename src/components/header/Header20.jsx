@@ -68,13 +68,13 @@ export default function Header20() {
                                 <div className="col-auto pe-0">
                                     <div className="d-flex align-items-center">
                                         <Link
-                                            className="header-logo bdrr1 pr30 pr5-xl"
+                                            className="header-logo bdrr1 pr20 pr5-xl"
                                             href={`/${currentLocale}`}
                                         >
                                             <Image
                                                 height={40}
                                                 width={100}
-                                                className="w-100 h-100 object-fit-contain"
+                                                className="w-90 h-50 object-fit-contain"
                                                 src="/images/about/prepmeelogo.svg"
                                                 alt="Header Logo"
                                                 priority

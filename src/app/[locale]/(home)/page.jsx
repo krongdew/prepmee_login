@@ -6,6 +6,7 @@ import React from "react";
 import CTa13 from "@/components/section/CTa13";
 import Header20 from "@/components/header/Header20";
 import Footer8 from "@/components/footer/Footer8";
+import BrowserCategory5 from "@/components/section/BrowserCategory5";
 
 export const metadata = {
     title: "Home",
@@ -18,7 +19,7 @@ export default function page({params}) {
           
                 <div className="body_content">
                 <Hero13 params={params} />
-           
+                     <BrowserCategory5 />
                     <TrendingService15 />
                     <NeedSomething2 />
                     <CTa13 />

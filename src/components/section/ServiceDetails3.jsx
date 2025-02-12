@@ -5,7 +5,7 @@ import ServiceDetailReviewInfo1 from "../element/ServiceDetailReviewInfo1";
 import { Sticky, StickyContainer } from "react-sticky";
 import useScreen from "@/hook/useScreen";
 import ServiceContactWidget1 from "../element/ServiceContactWidget1";
-import ServiceDetailSlider2 from "../element/ServiceDetailSlider2";
+import TutorVideo from "../element/TutorVideo";
 import { useParams } from "next/navigation";
 import { product1 } from "@/data/product";
 
@@ -73,7 +73,7 @@ export default function ServiceDetail3() {
                     </div>
                   </div>
 
-                  <ServiceDetailSlider2 />
+                  <TutorVideo/>
                   <div className="service-about">
                     <div className="px30 bdr1 pt30 pb-0 mb30 bg-white bdrs12 wow fadeInUp default-box-shadow1">
                       <h4>Tutor Detail</h4>

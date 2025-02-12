@@ -1,4 +1,4 @@
-export default function AllTimeSelling() {
+export default function HowToBook() {
   return (
     <>
       <div className="row wow fadeInUp" data-wow-delay="300ms">

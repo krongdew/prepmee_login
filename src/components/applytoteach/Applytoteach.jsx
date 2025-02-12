@@ -6,6 +6,7 @@ export default function Page() {
   const [formData, setFormData] = useState({
     fullName: '',
     subjects: [],
+    otherSubject: '',
     teachingModes: [],
     areas: '',
     province: '',
@@ -21,7 +22,7 @@ export default function Page() {
   const [submitStatus, setSubmitStatus] = useState('');
 
   const subjects = [
-   'Mathematics', 'Physics', 'Chemistry', 'Biology', 'Science', 'Social','English', 'Thai', 'Chinese', 'Korean', 'Japanese', 'French', 'German','History', 
+    'Mathematics', 'Physics', 'Chemistry', 'Biology', 'Science', 'Social','English', 'Thai', 'Chinese', 'Korean', 'Japanese', 'French', 'German','History', 
     'Coding & Programming', 'Chinese', 'Art', 'Music', 'Singing','Dance','Others'
   ];
 
@@ -39,6 +40,9 @@ export default function Page() {
     const newErrors = {};
     if (!formData.fullName) newErrors.fullName = 'Name is required';
     if (formData.subjects.length === 0) newErrors.subjects = 'Select at least one subject';
+    if (formData.subjects.includes('Others') && !formData.otherSubject) {
+      newErrors.otherSubject = 'Please specify other subject';
+    }
     if (formData.teachingModes.length === 0) newErrors.teachingModes = 'Select at least one teaching mode';
     if (formData.teachingModes.includes('onsite') && !formData.province) {
       newErrors.province = 'Province is required for onsite teaching';
@@ -97,10 +101,8 @@ export default function Page() {
   return (
     <>
       <div className="bgc-thm4">
-        
         <section className="our-register pt60">
           <div className="container">
-
             <div className="row wow fadeInRight" data-wow-delay="300ms">
               <div className="col-xl-10 mx-auto">
                 <div className="log-reg-form form-style1 bgc-white p50 mb60 bdrs12 position-relative">
@@ -228,6 +230,21 @@ export default function Page() {
                               </label>
                             </div>
                           ))}
+                          {formData.subjects.includes('Others') && (
+                            <div className="subject-item" style={{ gridColumn: '1 / -1' }}>
+                              <input
+                                type="text"
+                                className="form-control"
+                                value={formData.otherSubject}
+                                onChange={(e) => setFormData({...formData, otherSubject: e.target.value})}
+                                placeholder="Enter other subject"
+                                style={{ height: '40px' }}
+                              />
+                              {errors.otherSubject && (
+                                <div className="text-danger fs-14 mt-1">{errors.otherSubject}</div>
+                              )}
+                            </div>
+                          )}
                         </div>
                         {errors.subjects && (
                           <div className="text-danger fs-14 mt-1">{errors.subjects}</div>
@@ -369,7 +386,6 @@ export default function Page() {
             </div>
           </div>
         </section>
-
       </div>
 
 

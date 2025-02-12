@@ -17,8 +17,6 @@ export const dasboardNavigation = [
     icon: "flaticon-like",
     path: "/saved",
   },
-
-
   {
     id: 4,
     name: "Receipt",
@@ -49,17 +47,20 @@ export const dasboardNavigation = [
     icon: "flaticon-web",
     path: "/statements",
   },
-
-
- 
   {
     id: 9,
+    name: "Tutor Profile",
+    icon: "flaticon-photo",
+    path: "/tutorprofile",
+  },
+  {
+    id: 10,
     name: "My Profile",
     icon: "flaticon-photo",
     path: "/my-profile",
   },
   {
-    id: 10,
+    id: 11,
     name: "Logout",
     icon: "flaticon-logout",
     path: "/login",

@@ -1,5 +1,7 @@
 
+import React from "react";
 import DashboardNavigation from "../header/DashboardNavigation";
+import MyLessonInfo from "../section/MyLessonInfo";
 
 
 export default function DashboardInfo() {
@@ -14,7 +16,13 @@ export default function DashboardInfo() {
             <div className="dashboard_title_area">
               <h2>My Lessons</h2>
               <p className="text">You can see your upcoming lessons and previous lessons here</p>
+
             </div>
+            
+            
+        
+            
+            <MyLessonInfo />
           </div>
         </div>
        </div>

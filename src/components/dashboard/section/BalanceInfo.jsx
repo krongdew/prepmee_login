@@ -8,12 +8,12 @@ export default function BalanceInfo() {
   return (
     <>
       <div className="dashboard__content hover-bgc-color">
-        <div className="row pb40">
+        <div className="row pb10">
           <div className="col-lg-12">
             <DashboardNavigation />
           </div>
         </div>
-        <div className="row align-items-center justify-content-between pb40">
+        <div className="row align-items-center justify-content-between pb10">
           <div className="col-lg-6">
             <div className="dashboard_title_area">
               <h2>Balance</h2>

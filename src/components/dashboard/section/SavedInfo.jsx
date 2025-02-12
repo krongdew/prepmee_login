@@ -16,7 +16,7 @@ export default function SavedInfo() {
   return (
     <>
       <div className="dashboard__content hover-bgc-color">
-        <div className="row pb40">
+        <div className="row pb10">
           <div className="col-lg-12">
             <DashboardNavigation />
           </div>

@@ -7,14 +7,14 @@ export default function MessageInfo() {
   return (
     <>
       <div className="dashboard__content hover-bgc-color">
-        <div className="row pb40">
+        <div className="row pb10">
           <div className="col-lg-12">
             <DashboardNavigation />
           </div>
           <div className="col-lg-12">
             <div className="dashboard_title_area">
-              <h2>My messsages</h2>
-              <p className="text">You can view message histories up to 6 months</p>
+              <h2>My Messsages</h2>
+              <p className="text">You can view message history up to 6 months</p>
             </div>
           </div>
         </div>

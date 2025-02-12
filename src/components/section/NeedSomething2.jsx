@@ -1,4 +1,4 @@
-import AllTimeSelling from "../element/AllTimeSelling";
+import HowToBook from "../element/HowToBook";
 
 export default function NeedSomething2() {
   return (
@@ -16,7 +16,7 @@ export default function NeedSomething2() {
               </div>
             </div>
           </div>
-          <AllTimeSelling />
+          <HowToBook />
         </div>
       </section>
     </>

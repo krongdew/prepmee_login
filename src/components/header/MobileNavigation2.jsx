@@ -13,7 +13,7 @@ export default function MobileNavigation2() {
                   <Image
                     height={40}
                     width={133}
-                    src="/images/about/prepmeelogo.svg"
+                    src="/images/about/prepmeelogo.png"
                     alt="Header Logo"
                   />
                 </Link>

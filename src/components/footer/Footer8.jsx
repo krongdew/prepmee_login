@@ -71,9 +71,9 @@ export default function Footer8() {
                                 <Link className="footer-logo" href="/">
                                     <Image
                                         height={100}
-                                        width={150}
+                                        width={250}
                                         className="mb40"
-                                        src="images/about/prepmeefooter.svg"
+                                        src="images/about/prepmeelogo.png"
                                         alt="logo4"
                                     />
                                 </Link>

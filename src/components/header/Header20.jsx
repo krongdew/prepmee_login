@@ -75,7 +75,7 @@ export default function Header20() {
                                                 height={40}
                                                 width={100}
                                                 className="w-90 h-50 object-fit-contain"
-                                                src="/images/about/prepmeelogo.svg"
+                                                src="/images/about/prepmeelogo.png"
                                                 alt="Header Logo"
                                                 priority
                                             />

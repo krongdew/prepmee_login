@@ -17,7 +17,7 @@ export default function BrowserCategory5() {
           >
             <div className="col-lg-9">
               <div className="main-title2">
-                <h2 className="title">Browse talent by category</h2>
+                <h2 className="title">Browse Tutor by subject</h2>
                 <p className="paragraph">
                   Get some Inspirations from 1800+ skills
                 </p>
@@ -25,8 +25,8 @@ export default function BrowserCategory5() {
             </div>
             <div className="col-lg-3">
               <div className="text-start text-lg-end mb-3">
-                <Link className="ud-btn2" href="/service-1">
-                  All Categories
+                <Link className="ud-btn2" href="/find_result">
+                  All subject
                   <i className="fal fa-arrow-right-long dark-color" />
                 </Link>
               </div>

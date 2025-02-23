@@ -32,8 +32,8 @@ export default function TrendingService15() {
             </div>
             <div className="col-lg-3">
               <div className="text-start text-lg-end mb-4 mb-lg-2">
-                <Link className="ud-btn2" href="/service-1">
-                  All Categories
+                <Link className="ud-btn2" href="/find_result">
+                  All tutor
                   <i className="fal fa-arrow-right-long" />
                 </Link>
               </div>

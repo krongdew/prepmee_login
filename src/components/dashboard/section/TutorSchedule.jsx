@@ -4,6 +4,7 @@ import DashboardNavigation from "../header/DashboardNavigation";
 import { project1 } from "@/data/product";
 import DeleteModal from "../modal/DeleteModal";
 import ProposalModal1 from "../modal/ProposalModal1";
+import TutorCalendar from "./TutorCalendar.jsx"
 
 export default function TutorSchedule() {
   return (
@@ -20,7 +21,10 @@ export default function TutorSchedule() {
             </div>
           </div>
         </div>
-      
+            
+        {/* Tutor Calendar Component */}
+        <TutorCalendar />
+        
       </div>
       <ProposalModal1 />
       <DeleteModal />

@@ -4,12 +4,13 @@ import toggleStore from "@/store/toggleStore";
 import DashboardHeader from "./header/DashboardHeader";
 import DashboardSidebar from "./sidebar/DashboardSidebar";
 import DashboardFooter from "./footer/DashboardFooter";
+import ProtectedRoute from "@/components/auth/ProtectedRoute";
 
 export default function DashboardLayout({ children }) {
   const isActive = toggleStore((state) => state.isDasboardSidebarActive);
 
   return (
-    <>
+    <ProtectedRoute>
       <DashboardHeader />
       <div className="dashboard_content_wrapper">
         <div
@@ -24,6 +25,6 @@ export default function DashboardLayout({ children }) {
           </div>
         </div>
       </div>
-    </>
+    </ProtectedRoute>
   );
 }

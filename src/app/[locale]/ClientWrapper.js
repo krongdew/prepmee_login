@@ -1,3 +1,4 @@
+//src/app/[locale]/ClientWrapper.js
 "use client";
 
 import { DM_Sans } from "next/font/google";
@@ -6,6 +7,7 @@ import { usePathname } from "next/navigation";
 import BottomToTop from "@/components/button/BottomToTop";
 import SearchModal1 from "@/components/modal/SearchModal1";
 import NavSidebar from "@/components/sidebar/NavSidebar";
+import { AuthProvider } from '@/context/AuthContext';
 import "react-tooltip/dist/react-tooltip.css";
 
 // Initialize Bootstrap on client side
@@ -19,7 +21,7 @@ const dmSans = DM_Sans({
   variable: "--font-dm-sans",
 });
 
-export default function ClientLayout({ children }) {
+export default function ClientWrapper({ children }) {
   const path = usePathname();
 
   // Initialize WOW.js
@@ -32,15 +34,17 @@ export default function ClientLayout({ children }) {
   }, [path]);
 
   return (
-    <div className={dmSans.className}>
-      <SearchModal1 />
-      {children}
+    <AuthProvider>
+      <div className={dmSans.className}>
+        <SearchModal1 />
+        {children}
 
-      {/* bottom to top */}
-      <BottomToTop />
+        {/* bottom to top */}
+        <BottomToTop />
 
-      {/* sidebar mobile navigation */}
-      <NavSidebar />
-    </div>
+        {/* sidebar mobile navigation */}
+        <NavSidebar />
+      </div>
+    </AuthProvider>
   );
 }

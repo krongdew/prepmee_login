@@ -1,6 +1,8 @@
+//src/app/[locale]/layout.js
 import { NextIntlClientProvider } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { locales } from '@/i18n';
+import ClientWrapper from './ClientWrapper';
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -23,7 +25,9 @@ export default async function LocaleLayout({ children, params: { locale } }) {
 
   return (
     <NextIntlClientProvider messages={messages} locale={locale}>
-      {children}
+      <ClientWrapper>
+        {children}
+      </ClientWrapper>
     </NextIntlClientProvider>
   );
 }

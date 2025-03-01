@@ -55,7 +55,6 @@
 
 //   return <>{children}</>;
 // }
-
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -67,7 +66,8 @@ export default function ProtectedRoute({ children }) {
   const { user, loading } = useAuth();
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
-  const [isValidToken, setIsValidToken] = useState(false);
+  const [isValidToken, setIsValidToken] = useState(null); // เริ่มต้นด้วย null เพื่อระบุว่ายังไม่ได้ตรวจสอบ
+  const [isCheckingToken, setIsCheckingToken] = useState(true); // เพิ่มสถานะการตรวจสอบ token
 
   useEffect(() => {
     setMounted(true);
@@ -75,32 +75,39 @@ export default function ProtectedRoute({ children }) {
     // ตรวจสอบความถูกต้องของ token
     const checkToken = async () => {
       try {
+        setIsCheckingToken(true);
         const token = await authService.getValidToken();
+        console.log('Token validation result:', !!token);
         setIsValidToken(!!token);
       } catch (error) {
         console.error('Token validation failed:', error);
         setIsValidToken(false);
+      } finally {
+        setIsCheckingToken(false);
       }
     };
 
-    checkToken();
-  }, []);
+    if (mounted) {
+      checkToken();
+    }
+  }, [mounted]);
 
   useEffect(() => {
-    // เฉพาะเมื่อคอมโพเนนต์ถูก mount แล้ว และโหลดเสร็จแล้ว และไม่มีผู้ใช้หรือ token ไม่ถูกต้อง
-    if (mounted && !loading && (!user || !isValidToken)) {
+    // ทำงานเฉพาะเมื่อตรวจสอบทุกอย่างเสร็จสิ้นแล้วเท่านั้น
+    if (mounted && !loading && !isCheckingToken && isValidToken === false) {
       console.log('Not authenticated or invalid token, redirecting to login');
       const locale = window.location.pathname.split('/')[1];
       router.push(`/${locale}/login`);
     }
-  }, [user, loading, router, mounted, isValidToken]);
+  }, [user, loading, router, mounted, isValidToken, isCheckingToken]);
 
-  // ยังไม่แสดงอะไรระหว่างการโหลดครั้งแรกเพื่อป้องกัน flash
+  // ยังไม่แสดงอะไรระหว่างการโหลดครั้งแรก
   if (!mounted) {
     return null;
   }
 
-  if (loading) {
+  // แสดง loading indicator ถ้ากำลังโหลดข้อมูลผู้ใช้หรือตรวจสอบ token
+  if (loading || isCheckingToken || isValidToken === null) {
     return (
       <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
         <div className="spinner-border text-primary" role="status">
@@ -110,8 +117,8 @@ export default function ProtectedRoute({ children }) {
     );
   }
 
-  // ถ้าไม่มีผู้ใช้หรือ token ไม่ถูกต้อง จะแสดงหน้าโหลดระหว่างการเปลี่ยนเส้นทาง
-  if (!user || !isValidToken) {
+  // ถ้าตรวจสอบแล้วว่า token ไม่ถูกต้อง จะแสดงหน้าโหลดระหว่างการเปลี่ยนเส้นทาง
+  if (isValidToken === false) {
     return (
       <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
         <div className="text-center">
@@ -124,5 +131,6 @@ export default function ProtectedRoute({ children }) {
     );
   }
 
+  // ถ้ามา render ถึงจุดนี้ แสดงว่า token valid แล้ว
   return <>{children}</>;
 }

@@ -164,12 +164,15 @@ export const authService = {
   // ดึง token ที่ valid
   async getValidToken() {
     const accessToken = localStorage.getItem('accessToken');
+    console.log('Checking access token:', accessToken ? 'Present' : 'Not present');
     
     // ถ้ามี access token และยังไม่หมดอายุ ให้ใช้ token นั้น
     if (accessToken && !isTokenExpired(accessToken)) {
+      console.log('Access token is valid');
       return accessToken;
     }
     
+    console.log('Access token is expired or not present, trying refresh token');
     // ถ้า access token หมดอายุ ให้ลองใช้ refresh token
     return await this.refreshToken();
   },

@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Calendar, momentLocalizer, Views } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import './minimal-calendar.css';
 import { Button, Modal, Form } from 'react-bootstrap';
 
 // Sample data - replace with your actual data fetching logic
@@ -213,10 +214,10 @@ export default function TutorCalendar() {
   }, []);
 
   return (
-    <div className="row">
-      <div className="col-lg-12">
-        <div className="dashboard__content">
-          <div className="tutor-calendar-container bg-white p-4 rounded shadow-sm mb-4">
+<div className="row">
+          <div className="col-xl-12">
+            <div className="ps-widget bgc-white bdrs4 p30 mb30 overflow-hidden position-relative">
+          <div >
             <div className="d-flex justify-content-between align-items-center mb-4">
               <h3>Tutor Schedule</h3>
               <Button 

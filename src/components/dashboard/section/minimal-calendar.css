@@ -1,0 +1,193 @@
+/* สไตล์ปฏิทินแบบมินิมอล */
+/* ไฟล์นี้ควรถูกนำเข้าหลังจาก react-big-calendar CSS */
+
+/* ปรับปรุงคอนเทนเนอร์หลัก */
+.ps-widget {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: none !important;
+  }
+  
+  /* ปรับปรุงส่วนหัว calendar */
+  .rbc-toolbar {
+    margin-bottom: 20px;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .rbc-toolbar button {
+    border: 1px solid #f0f0f0;
+    border-radius: 6px;
+    color: #555;
+    font-weight: 500;
+    padding: 8px 16px;
+    background-color: white;
+    transition: all 0.2s ease;
+  }
+  
+  .rbc-toolbar button:hover {
+    background-color: #f9f9f9;
+    color: #333;
+  }
+  
+  .rbc-toolbar button.rbc-active {
+    background-color: #f0f0f0;
+    color: #222;
+    box-shadow: none;
+  }
+  
+  .rbc-toolbar-label {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  /* กริดและเซลล์ */
+  .rbc-month-view, 
+  .rbc-time-view {
+    border-radius: 8px;
+    border: 1px solid #f0f0f0;
+    overflow: hidden;
+  }
+  
+  .rbc-header {
+    font-weight: 500;
+    padding: 12px 3px;
+    border-bottom: 1px solid #f0f0f0;
+    color: #555;
+  }
+  
+  .rbc-day-bg {
+    transition: background-color 0.1s ease;
+  }
+  
+  .rbc-day-bg:hover {
+    background-color: #f9f9f9;
+  }
+  
+  .rbc-off-range-bg {
+    background-color: #fcfcfc;
+  }
+  
+  .rbc-today {
+    background-color: rgba(66, 133, 244, 0.05);
+  }
+  
+  /* ปรับแต่งอีเวนต์ */
+  .rbc-event {
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 0.85rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: none !important;
+  }
+  
+  .rbc-event-content {
+    font-weight: 500;
+  }
+  
+  /* ปรับแต่งการแสดงเวลา */
+  .rbc-time-header-content, .rbc-time-slot {
+    font-size: 0.85rem;
+  }
+  
+  .rbc-time-gutter, .rbc-label {
+    font-size: 0.75rem;
+    color: #666;
+  }
+  
+  /* ปรับแต่ง Modal */
+  .modal-content {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+  
+  .modal-header {
+    border-bottom: 1px solid #f0f0f0;
+    padding: 16px 24px;
+  }
+  
+  .modal-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+  
+  .modal-body {
+    padding: 24px;
+    color: #444;
+  }
+  
+  .modal-footer {
+    border-top: 1px solid #f0f0f0;
+    padding: 16px 24px;
+  }
+  
+  /* ปรับแต่งปุ่ม */
+  .btn {
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+  
+  .btn-primary {
+    background-color: #4285f4;
+    border-color: #4285f4;
+  }
+  
+  .btn-primary:hover {
+    background-color: #3367d6;
+    border-color: #3367d6;
+  }
+  
+  .btn-outline-secondary {
+    color: #555;
+    border-color: #e0e0e0;
+  }
+  
+  .btn-outline-secondary:hover {
+    background-color: #f5f5f5;
+    border-color: #ddd;
+    color: #333;
+  }
+  
+  .btn-secondary {
+    background-color: #f0f0f0;
+    border-color: #e0e0e0;
+    color: #333;
+  }
+  
+  /* ปรับแต่ง Form controls */
+  .form-control {
+    border-radius: 6px;
+    border-color: #e0e0e0;
+    padding: 10px 12px;
+  }
+  
+  .form-control:focus {
+    box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.15);
+    border-color: #4285f4;
+  }
+  
+  /* สถานะสี (ปรับให้มีความมินิมอลมากขึ้น) */
+  .bg-primary, .badge-primary {
+    background-color: #4285f4 !important;
+  }
+  
+  .bg-success, .badge-success {
+    background-color: #34a853 !important;
+  }
+  
+  .bg-warning, .badge-warning {
+    background-color: #fbbc05 !important;
+  }
+  
+  .bg-danger, .badge-danger {
+    background-color: #ea4335 !important;
+  }
+  
+  /* ส่วนหัวของคอมโพเนนต์ */
+  h3 {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 16px;
+  }

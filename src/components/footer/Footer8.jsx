@@ -73,7 +73,7 @@ export default function Footer8() {
                                         height={100}
                                         width={250}
                                         className="mb40"
-                                        src="images/about/prepmeelogo.png"
+                                        src="/images/about/prepmeelogo.png"
                                         alt="logo4"
                                     />
                                 </Link>

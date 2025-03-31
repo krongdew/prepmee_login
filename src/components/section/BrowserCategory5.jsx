@@ -5,8 +5,21 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import Link from "next/link";
 import BrowserCategoryCard5 from "../card/BrowserCategoryCard5";
+import { useParams } from "next/navigation";
 
 export default function BrowserCategory5() {
+  // Get current locale from URL params
+  const params = useParams();
+  const locale = params?.locale || "en";
+
+  // Function to create the URL with subject parameter
+  const createSubjectUrl = (subject) => {
+    const encodedSubject = encodeURIComponent(subject);
+    const url = `/${locale}/find_result?subject=${encodedSubject}`;
+    console.log(`สร้าง URL สำหรับวิชา "${subject}":`, url);
+    return url;
+  };
+
   return (
     <>
       <section className="pb70 pb30-md pt40">
@@ -33,9 +46,9 @@ export default function BrowserCategory5() {
             </div>
           </div>
           <div className="row wow fadeInUp" data-wow-delay="300ms">
-            {browserCategory.slice(0, 8).map((item,i) => (
-              <div key={ i } className="col-sm-6 col-lg-3">
-                <Link href="/service-1">
+            {browserCategory.slice(0, 8).map((item, i) => (
+              <div key={i} className="col-sm-6 col-lg-3">
+                <Link href={createSubjectUrl(item.title)}>
                   <BrowserCategoryCard5 data={item} />
                 </Link>
               </div>

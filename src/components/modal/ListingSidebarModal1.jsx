@@ -1,53 +1,119 @@
 "use client";
 import toggleStore from "@/store/toggleStore";
-import DeliveryTimeOption1 from "../option/DeliveryTimeOption1";
-import BudgetOption1 from "../option/BudgetOption1";
-import DesignToolOption1 from "../option/DesignToolOption1";
 import LocationOption1 from "../option/LocationOption1";
-import SpeakOption1 from "../option/SpeakOption1";
-import LevelOption1 from "../option/LevelOption1";
+import BudgetOption2 from "../option/BudgetOption2";
 import ClearButton from "../button/ClearButton";
+import SubjectOption from "../option/SubjectOption";
+import { useEffect, useRef } from "react";
 
-export default function ListingSidebarModal1() {
+export default function ListingSidebarModal1({ directSubject }) {
   const listingToggle = toggleStore((state) => state.listingToggleHandler);
+  const isActive = toggleStore((state) => state.isListingActive);
+  
+  // Use a ref to track if the effect has run
+  const hasEffectRun = useRef(false);
+  
+  // ป้องกันการเลื่อนหน้าเมื่อ modal เปิด และป้องกัน infinite loop
+  useEffect(() => {
+    // Skip effect if it has already run for this render cycle
+    if (hasEffectRun.current) return;
+    
+    if (typeof document !== 'undefined') {
+      if (isActive) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    }
+    
+    console.log("Modal ควรจะ", isActive ? "เปิด" : "ปิด");
+    
+    // Mark effect as having run
+    hasEffectRun.current = true;
+    
+    // Clean up function
+    return () => {
+      if (typeof document !== 'undefined') {
+        document.body.style.overflow = '';
+      }
+      // Reset the ref for next render
+      hasEffectRun.current = false;
+    };
+  }, [isActive]);
+
+  if (!isActive) {
+    return null; // ถ้าไม่ active ไม่ต้องแสดง modal
+  }
 
   return (
     <>
-      <div className="lefttside-hidden-bar">
-        <div className="hsidebar-header bdrb1">
-          <h4 className="list-title">All filters</h4>
-          <div onClick={listingToggle} className="sidebar-close-icon">
+      {/* พื้นหลังทึบเมื่อ modal เปิด */}
+      <div 
+        onClick={listingToggle}
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          zIndex: 9998,
+        }}
+      />
+      
+      {/* Modal ตัวกรอง */}
+      <div 
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '280px',
+          height: '100%',
+          backgroundColor: '#fff',
+          zIndex: 9999,
+          overflowY: 'auto',
+          boxShadow: '0 0 15px rgba(0, 0, 0, 0.2)',
+        }}
+      >
+        <div style={{ padding: '15px', borderBottom: '1px solid #e5e5e5', display: 'flex', justifyContent: 'space-between' }}>
+          <h4 style={{ margin: 0 }}>ตัวกรองทั้งหมด</h4>
+          <div 
+            onClick={listingToggle} 
+            style={{ cursor: 'pointer' }}
+          >
             <span className="far fa-times" />
           </div>
         </div>
-        <div className="hsidebar-content">
+        
+        <div style={{ padding: '15px' }}>
           <div className="widget-wrapper">
             <div className="sidebar-accordion">
               <div className="accordion" id="accordionExample2">
                 <div className="card mb20 pb10 rounded-0">
-                  <div className="card-header" id="headingZero">
+                  <div className="card-header" id="headingSubject">
                     <h4>
                       <button
                         className="btn btn-link ps-0"
                         type="button"
                         data-bs-toggle="collapse"
-                        data-bs-target="#collapseZero"
-                        aria-expanded="false"
-                        aria-controls="collapseZero"
+                        data-bs-target="#collapseSubject"
+                        aria-expanded="true"
+                        aria-controls="collapseSubject"
                       >
-                        Delivery Time
+                        วิชา (Subject)
                       </button>
                     </h4>
                   </div>
                   <div
-                    id="collapseZero"
+                    id="collapseSubject"
                     className="collapse show"
-                    aria-labelledby="headingZero"
-                    data-parent="#accordionExample"
+                    aria-labelledby="headingSubject"
+                    data-parent="#accordionExample2"
                   >
-                    <DeliveryTimeOption1 />
+                    <SubjectOption directSubject={directSubject} />
                   </div>
                 </div>
+                
                 <div className="card mb20 pb0 rounded-0">
                   <div className="card-header" id="headingOnes">
                     <h4>
@@ -56,10 +122,10 @@ export default function ListingSidebarModal1() {
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target="#collapseOnes"
-                        aria-expanded="true"
+                        aria-expanded="false"
                         aria-controls="collapseOnes"
                       >
-                        Budget
+                        งบประมาณ (Budget)
                       </button>
                     </h4>
                   </div>
@@ -67,35 +133,12 @@ export default function ListingSidebarModal1() {
                     id="collapseOnes"
                     className="collapse"
                     aria-labelledby="headingOnes"
-                    data-parent="#accordionExample"
+                    data-parent="#accordionExample2"
                   >
-                    <BudgetOption1 />
+                    <BudgetOption2 />
                   </div>
                 </div>
-                <div className="card mb20 pb5 rounded-0">
-                  <div className="card-header" id="headingTwos">
-                    <h4>
-                      <button
-                        className="btn btn-link ps-0"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#collapseTwos"
-                        aria-expanded="true"
-                        aria-controls="collapseTwos"
-                      >
-                        Design Tool
-                      </button>
-                    </h4>
-                  </div>
-                  <div
-                    id="collapseTwos"
-                    className="collapse"
-                    aria-labelledby="headingTwos"
-                    data-parent="#accordionExample"
-                  >
-                    <DesignToolOption1 />
-                  </div>
-                </div>
+                
                 <div className="card mb20 pb5 rounded-0">
                   <div className="card-header" id="headingThrees">
                     <h4>
@@ -104,10 +147,10 @@ export default function ListingSidebarModal1() {
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target="#collapseThrees"
-                        aria-expanded="true"
+                        aria-expanded="false"
                         aria-controls="collapseThrees"
                       >
-                        Location
+                        สถานที่ (Location)
                       </button>
                     </h4>
                   </div>
@@ -115,57 +158,9 @@ export default function ListingSidebarModal1() {
                     id="collapseThrees"
                     className="collapse"
                     aria-labelledby="headingThrees"
-                    data-parent="#accordionExample"
+                    data-parent="#accordionExample2"
                   >
                     <LocationOption1 />
-                  </div>
-                </div>
-                <div className="card mb20 pb5 rounded-0">
-                  <div className="card-header" id="headingFours">
-                    <h4>
-                      <button
-                        className="btn btn-link ps-0"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#collapseFours"
-                        aria-expanded="true"
-                        aria-controls="collapseFours"
-                      >
-                        Speaks
-                      </button>
-                    </h4>
-                  </div>
-                  <div
-                    id="collapseFours"
-                    className="collapse"
-                    aria-labelledby="headingFours"
-                    data-parent="#accordionExample"
-                  >
-                    <SpeakOption1 />
-                  </div>
-                </div>
-                <div className="card mb20 pb0 rounded-0">
-                  <div className="card-header" id="headingFives">
-                    <h4>
-                      <button
-                        className="btn btn-link ps-0"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#collapseFives"
-                        aria-expanded="true"
-                        aria-controls="collapseFives"
-                      >
-                        Level
-                      </button>
-                    </h4>
-                  </div>
-                  <div
-                    id="collapseFives"
-                    className="collapse"
-                    aria-labelledby="headingFives"
-                    data-parent="#accordionExample"
-                  >
-                    <LevelOption1 />
                   </div>
                 </div>
               </div>
@@ -174,7 +169,6 @@ export default function ListingSidebarModal1() {
           </div>
         </div>
       </div>
-      <div onClick={listingToggle} className="hiddenbar-body-ovelay" />
     </>
   );
 }

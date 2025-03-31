@@ -1,16 +1,19 @@
 import ClearButton from "../button/ClearButton";
 import BudgetOption2 from "../option/BudgetOption2";
-import DeliveryTimeOption1 from "../option/DeliveryTimeOption1";
-import DesignToolOption1 from "../option/DesignToolOption1";
-import LevelOption1 from "../option/LevelOption1";
 import LocationOption1 from "../option/LocationOption1";
-import SpeakOption1 from "../option/SpeakOption1";
+import SubjectOption from "../option/SubjectOption";
+import { useSearchParams } from "next/navigation";
 
-export default function ListingSidebar1() {
+export default function ListingSidebar1({ directSubject }) {
+  // ดึง URL parameters เพื่อใช้ตรวจสอบตอน render
+  const searchParams = useSearchParams();
+  const subjectParam = searchParams?.get("subject");
+
   return (
     <>
       <div className="list-sidebar-style1 d-none d-lg-block">
         <div className="accordion" id="accordionExample">
+          {/* ตัวกรองตามวิชา */}
           <div className="card mb20 pb10 mt-0">
             <div className="card-header" id="heading0">
               <h4>
@@ -19,10 +22,10 @@ export default function ListingSidebar1() {
                   type="button"
                   data-bs-toggle="collapse"
                   data-bs-target="#collapse0"
-                  aria-expanded="false"
+                  aria-expanded="true"
                   aria-controls="collapse0"
                 >
-                  Delivery Time
+                  วิชา (Subject)
                 </button>
               </h4>
             </div>
@@ -32,9 +35,12 @@ export default function ListingSidebar1() {
               aria-labelledby="heading0"
               data-parent="#accordionExample"
             >
-              <DeliveryTimeOption1 />
+              {/* ส่ง subjectParam ไปให้ SubjectOption ด้วย เผื่อกรณีที่ directSubject ไม่มีค่า */}
+              <SubjectOption directSubject={directSubject || subjectParam} />
             </div>
           </div>
+          
+          {/* ตัวกรองตามงบประมาณ */}
           <div className="card mb20 pb0">
             <div className="card-header" id="heading1">
               <h4>
@@ -46,7 +52,7 @@ export default function ListingSidebar1() {
                   aria-expanded="false"
                   aria-controls="collapse1"
                 >
-                  Budget
+                  งบประมาณ (Budget)
                 </button>
               </h4>
             </div>
@@ -59,30 +65,8 @@ export default function ListingSidebar1() {
               <BudgetOption2 />
             </div>
           </div>
-          <div className="card mb20 pb5">
-            <div className="card-header" id="heading2">
-              <h4>
-                <button
-                  className="btn btn-link ps-0 collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapse2"
-                  aria-expanded="false"
-                  aria-controls="collapse2"
-                >
-                  Design Tool
-                </button>
-              </h4>
-            </div>
-            <div
-              id="collapse2"
-              className="collapse"
-              aria-labelledby="heading2"
-              data-parent="#accordionExample"
-            >
-              <DesignToolOption1 />
-            </div>
-          </div>
+          
+          {/* ตัวกรองตามสถานที่ */}
           <div className="card mb20 pb5">
             <div className="card-header" id="heading3">
               <h4>
@@ -94,7 +78,7 @@ export default function ListingSidebar1() {
                   aria-expanded="false"
                   aria-controls="collapse3"
                 >
-                  Location
+                  สถานที่ (Location)
                 </button>
               </h4>
             </div>
@@ -107,55 +91,9 @@ export default function ListingSidebar1() {
               <LocationOption1 />
             </div>
           </div>
-          <div className="card mb20 pb5">
-            <div className="card-header" id="heading4">
-              <h4>
-                <button
-                  className="btn btn-link ps-0 collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapse4"
-                  aria-expanded="false"
-                  aria-controls="collapse4"
-                >
-                  Speaks
-                </button>
-              </h4>
-            </div>
-            <div
-              id="collapse4"
-              className="collapse"
-              aria-labelledby="heading4"
-              data-parent="#accordionExample"
-            >
-              <SpeakOption1 />
-            </div>
-          </div>
-          <div className="card mb20 pb0">
-            <div className="card-header" id="heading5">
-              <h4>
-                <button
-                  className="btn btn-link ps-0 collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapse5"
-                  aria-expanded="false"
-                  aria-controls="collapse5"
-                >
-                  Level
-                </button>
-              </h4>
-            </div>
-            <div
-              id="collapse5"
-              className="collapse"
-              aria-labelledby="heading5"
-              data-parent="#accordionExample"
-            >
-              <LevelOption1 />
-            </div>
-          </div>
         </div>
+        
+        {/* ปุ่มล้างตัวกรอง */}
         <ClearButton />
       </div>
     </>

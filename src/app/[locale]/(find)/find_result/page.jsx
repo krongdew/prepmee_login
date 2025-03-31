@@ -8,13 +8,18 @@ export const metadata = {
     title: "Tutor Finder",
 };
 
-export default function page() {
+// ใช้ dynamic rendering เพื่อป้องกันปัญหากับ static generation
+export const dynamic = 'force-dynamic';
+
+export default function Page({ params, searchParams }) {
+    // ใช้ชื่อหมวดหมู่สำหรับ breadcrumb (ไม่ล็อกออกเพื่อป้องกันปัญหา)
+    const subjectName = searchParams?.subject || "All Subjects";
+    
     return (
         <>
-            <Header20 />
+            <Header20 params={params} />
             <TabSection1 />
-            <Breadcumb3 path={["Home", "Services", "Design & Creative"]} />
-          
+            <Breadcumb3 path={["Home", "Services", subjectName]} />
             <Listing3 />
             <Footer8 />
         </>

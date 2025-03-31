@@ -1,10 +1,11 @@
 "use client";
-
 import listingStore from "@/store/listingStore";
 import priceStore from "@/store/priceStore";
+import { useRouter, useParams, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function ClearButton() {
-  // set handlers
+  // Set handlers
   const setDeliveryTime = listingStore((state) => state.setDeliveryTime);
   const setLevel = listingStore((state) => state.setLevel);
   const setLocation = listingStore((state) => state.setLocation);
@@ -19,7 +20,7 @@ export default function ClearButton() {
   const setJobType = listingStore((state) => state.setJobType);
   const setNoOfEmployee = listingStore((state) => state.setNoOfEmployee);
 
-  // get state
+  // Get state
   const getDeliveryTime = listingStore((state) => state.getDeliveryTime);
   const getLevel = listingStore((state) => state.getLevel);
   const getLocation = listingStore((state) => state.getLocation);
@@ -34,39 +35,84 @@ export default function ClearButton() {
   const getJobType = listingStore((state) => state.getJobType);
   const getNoOfEmployee = listingStore((state) => state.getNoOfEmployee);
 
-  // clear handler
+  // Router และ URL parameters
+  const router = useRouter();
+  const params = useParams();
+  const searchParams = useSearchParams();
+  const subjectParam = searchParams?.get("subject");
+  const locale = params?.locale || "en";
+
+  // ตรวจสอบว่ามีตัวกรองใดทำงานอยู่บ้าง
+  const [isAnyFilterActive, setIsAnyFilterActive] = useState(false);
+
+  // ตรวจสอบสถานะตัวกรองและอัปเดต state
+  useEffect(() => {
+    const hasActiveFilter = 
+      getDeliveryTime !== "" ||
+      (Array.isArray(getLevel) && getLevel.length !== 0) ||
+      (Array.isArray(getLocation) && getLocation.length !== 0) ||
+      getSearch !== "" ||
+      getBestSeller !== "best-seller" ||
+      (Array.isArray(getDesginTool) && getDesginTool.length !== 0) ||
+      (Array.isArray(getSpeak) && getSpeak.length !== 0) ||
+      (getPriceRange && (getPriceRange.min !== 0 || getPriceRange.max !== 100000)) ||
+      (Array.isArray(getCategory) && getCategory.length !== 0) ||
+      (Array.isArray(getProjectType) && getProjectType.length !== 0) ||
+      (Array.isArray(getEnglishLevel) && getEnglishLevel.length !== 0) ||
+      (Array.isArray(getJobType) && getJobType.length !== 0) ||
+      (Array.isArray(getNoOfEmployee) && getNoOfEmployee.length !== 0) ||
+      !!subjectParam; // ตรวจสอบว่ามี URL parameter ด้วย
+    
+    setIsAnyFilterActive(hasActiveFilter);
+  }, [
+    getDeliveryTime, getLevel, getLocation, getSearch, getBestSeller,
+    getDesginTool, getSpeak, getPriceRange, getCategory, getProjectType,
+    getEnglishLevel, getJobType, getNoOfEmployee, subjectParam
+  ]);
+
+  // Clear handler - ล้างตัวกรองทั้งหมด
   const clearHandler = () => {
+    console.log("ClearButton - กำลังล้างตัวกรองทั้งหมด");
+
+    // ล้างตัวกรอง category (subject) ก่อน
+    if (Array.isArray(getCategory) && getCategory.length > 0) {
+      console.log("ClearButton - ล้าง categories:", getCategory);
+      
+      // ล้างทีละตัว - deep copy เพื่อป้องกันการเปลี่ยนแปลงขณะวนลูป
+      [...getCategory].forEach(category => {
+        if (typeof setCategory === 'function') {
+          console.log(`ClearButton - ล้าง category: ${category}`);
+          setCategory(category);
+        }
+      });
+    }
+    
+    // ล้างตัวกรองอื่นๆ
     setDeliveryTime("");
     setLevel([]);
     setLocation([]);
     setBestSeller("best-seller");
     setDesginTool([]);
     setSpeak([]);
-    setPriceRange(0, 100000);
+    if (typeof setPriceRange === 'function') {
+      setPriceRange(0, 100000);
+    }
     setSearch("");
-    setCategory([]);
     setProjectType([]);
     setEnglishLevel([]);
     setJobType([]);
     setNoOfEmployee([]);
+
+    // นำทางกลับไปหน้าไม่มีพารามิเตอร์ subject
+    if (subjectParam) {
+      console.log(`ClearButton - นำทางกลับไปที่: /${locale}/find_result`);
+      router.push(`/${locale}/find_result`);
+    }
   };
 
   return (
     <>
-      {getDeliveryTime !== "" ||
-      getLevel?.length !== 0 ||
-      getLocation?.length !== 0 ||
-      getSearch !== "" ||
-      getBestSeller !== "best-seller" ||
-      getDesginTool?.length !== 0 ||
-      getSpeak?.length !== 0 ||
-      getPriceRange.min !== 0 ||
-      getPriceRange.max !== 100000 ||
-      getCategory?.length !== 0 ||
-      getProjectType?.length !== 0 ||
-      getEnglishLevel?.length !== 0 ||
-      getJobType?.length !== 0 ||
-      getNoOfEmployee?.length !== 0 ? (
+      {isAnyFilterActive && (
         <button
           onClick={clearHandler}
           className="ud-btn btn-thm ui-clear-btn w-100"
@@ -74,8 +120,6 @@ export default function ClearButton() {
           Clear
           <i className="fal fa-arrow-right-long"></i>
         </button>
-      ) : (
-        ""
       )}
     </>
   );

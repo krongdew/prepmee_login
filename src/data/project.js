@@ -5,7 +5,8 @@ export const browserCategory = [
     skill: 1.853,
     title: "Science, Biology & Chemistry",
     brif: "Software Engineer, Web / Mobile Developer & More",
-    img: "/images/listings/category-1.jpg",
+    // img: "/images/listings/category-1.jpg",
+    img: "menu-icn flaticon-rocket-1",
   },
   {
     id: 2,
@@ -13,7 +14,8 @@ export const browserCategory = [
     skill: 1.853,
     title: "Math & Physics",
     brif: "Software Engineer, Web / Mobile Developer & More",
-    img: "/images/listings/category-2.jpg",
+    // img: "/images/listings/category-1.jpg",
+    img: "menu-icn flaticon-ruler",
   },
   {
     id: 3,
@@ -21,7 +23,8 @@ export const browserCategory = [
     skill: 1.853,
     title: "Languages",
     brif: "Software Engineer, Web / Mobile Developer & More",
-    img: "/images/listings/category-4.jpg",
+    // img: "/images/listings/category-1.jpg",
+    img: "menu-icn flaticon-translator",
   },
   {
     id: 4,
@@ -29,7 +32,8 @@ export const browserCategory = [
     skill: 1.853,
     title: "Musics",
     brif: "Software Engineer, Web / Mobile Developer & More",
-    img: "/images/listings/category-5.jpg",
+    // img: "/images/listings/category-1.jpg",
+    img: "menu-icn flaticon-microphone",
   },
   {
     id: 5,
@@ -37,7 +41,8 @@ export const browserCategory = [
     skill: 1.853,
     title: "Test Prep",
     brif: "Software Engineer, Web / Mobile Developer & More",
-    img: "/images/listings/category-3.jpg",
+    // img: "/images/listings/category-1.jpg",
+    img: "menu-icn flaticon-goal",
   },
   {
     id: 6,
@@ -45,7 +50,8 @@ export const browserCategory = [
     skill: 1.853,
     title: "IT & Coding",
     brif: "Software Engineer, Web / Mobile Developer & More",
-    img: "/images/listings/category-1.jpg",
+    // img: "/images/listings/category-1.jpg",
+    img: "menu-icn flaticon-developer",
   },
   {
     id: 7,
@@ -53,7 +59,8 @@ export const browserCategory = [
     skill: 1.853,
     title: "Art & Craft",
     brif: "Software Engineer, Web / Mobile Developer & More",
-    img: "/images/listings/category-2.jpg",
+    // img: "/images/listings/category-1.jpg",
+    img: "menu-icn flaticon-web-design-1",
   },
 ];
 

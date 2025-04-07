@@ -2,7 +2,6 @@
 const withNextIntl = require('next-intl/plugin')('./src/i18n.js');
 
 const nextConfig = {
-    output: 'export',
     images: {
       unoptimized: true,
       formats: ['image/webp'],

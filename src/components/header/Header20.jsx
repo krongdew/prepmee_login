@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl'; // เพิ่ม useLocale
 import { useAuth } from '@/context/AuthContext';
 import Mega from "./Mega";
 import Navigation from "./Navigation";
@@ -36,7 +36,7 @@ const LanguageSwitcher = () => {
 export default function Header20() {
     const pathname = usePathname();
     const [hasMounted, setHasMounted] = useState(false);
-    const currentLocale = pathname.split('/')[1] || 'th';
+    const currentLocale = useLocale(); // ใช้ useLocale แทนการดึงจาก pathname
     const t = useTranslations('Common');
     const { user, isAuthenticated, logout } = useAuth();
     const [showUserDropdown, setShowUserDropdown] = useState(false);

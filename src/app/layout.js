@@ -1,18 +1,18 @@
+// prepmee_website/src/app/layout.js
 import './globals.css'
-import ClientWrapper from './[locale]/ClientWrapper'
-import { defaultLocale } from '@/i18n'
 
 export const metadata = {
   title: 'Prepmee',
   description: 'Prepmee',
 }
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children, params }) {
+  const locale = params?.locale || 'th'; 
   return (
-    <html lang={defaultLocale}>
+    <html lang={locale}>
       <body>
         {children}
       </body>
     </html>
-  )
+  );
 }

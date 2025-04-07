@@ -4,7 +4,11 @@ import About5 from "@/components/section/About5";
 import CounterInfo1 from "@/components/section/CounterInfo1";
 import OurFaq1 from "@/components/section/OurFaq1";
 import Footer8 from "@/components/footer/Footer8";
+import { getLocale } from 'next-intl/server';
+
 export default function page() {
+  
+
     return (
         <>
             <Header20 />

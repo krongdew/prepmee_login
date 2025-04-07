@@ -4,7 +4,7 @@ import Link from "next/link";
 import DashboardNavigation from "../header/DashboardNavigation";
 import Pagination1 from "@/components/section/Pagination1";
 import BalanceCard from "@/components/dashboard/card/BalanceCard";
-import TopUpModal from "../modal/TopUpModal";
+import TopUpModal from "../modal/TopupModal";
 import { balanceMockData } from "@/data/balance";
 
 export default function BalanceInfo() {

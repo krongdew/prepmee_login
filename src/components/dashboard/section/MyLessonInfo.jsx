@@ -1,111 +1,139 @@
-import React from 'react';
-import { Calendar, List, MoreHorizontal } from 'lucide-react';
+"use client";
+import React, { useState } from 'react';
 import Pagination1 from '@/components/section/Pagination1';
+import { lessons } from '@/data/lessons';
+
+// Import separated components
+import LessonCard from '../card/LessonCard';
+import LessonDetailModal from '../modal/LessonDetailModal';
+import RatingModal from '../modal/RatingModal';
 
 const MyLessonInfo = () => {
-  const lessons = {
-    upcoming: [
-      { date: '11', month: 'APR', day: 'Monday', time: '12:00 - 13:00', tutor: 'Rizza', subject: 'English' },
-      { date: '19', month: 'APR', day: 'Tuesday', time: '10:00 - 11:00', tutor: 'Rizza', subject: 'English' }
-    ],
-    past: [
-      { date: '04', month: 'APR', day: 'Monday', time: '12:00 - 13:00', tutor: 'Rizza', subject: 'English', paid: '300 BAHT' },
-      { date: '30', month: 'MAR', day: 'Wednesday', time: '11:00 - 12:00', tutor: 'Rizza', subject: 'English', paid: '300 BAHT' },
-      { date: '21', month: 'FEB', day: 'Monday', time: '11:00 - 12:00', tutor: 'Rizza', subject: 'English', paid: '300 BAHT' },
-      { date: '18', month: 'FEB', day: 'Friday', time: '11:00 - 12:00', tutor: 'Rizza', subject: 'English', paid: '300 BAHT' }
-    ]
+  const [showDetails, setShowDetails] = useState(false);
+  const [selectedLesson, setSelectedLesson] = useState(null);
+  const [showRatingModal, setShowRatingModal] = useState(false);
+  const [ratingValue, setRatingValue] = useState(0);
+  const [currentLessons, setCurrentLessons] = useState(lessons);
+
+  // Handle opening details modal for upcoming lessons
+  const handleViewDetails = (lesson) => {
+    setSelectedLesson(lesson);
+    setShowDetails(true);
   };
 
-  const customColor = '#5BBBA1';
+  // Handle opening rating modal for past lessons
+  const handleRating = (lesson) => {
+    setSelectedLesson(lesson);
+    setRatingValue(lesson.rated ? lesson.rating : 0);
+    setShowRatingModal(true);
+  };
+
+  // Handle submitting ratings
+  const submitRating = () => {
+    const updatedLessons = {
+      ...currentLessons,
+      past: currentLessons.past.map(lesson => 
+        lesson.id === selectedLesson.id 
+          ? {...lesson, rated: true, rating: ratingValue} 
+          : lesson
+      )
+    };
+    
+    setCurrentLessons(updatedLessons);
+    setShowRatingModal(false);
+  };
+
+  // Check if a lesson can be cancelled (more than 24 hours before start)
+  const canCancel = (lesson) => {
+    if (!lesson.lessonDate) return false;
+    
+    const now = new Date();
+    const timeDiff = lesson.lessonDate.getTime() - now.getTime();
+    const hoursDiff = timeDiff / (1000 * 60 * 60);
+    
+    return hoursDiff > 24;
+  };
+
+  // Handle lesson cancellation
+  const handleCancelLesson = () => {
+    const updatedLessons = {
+      ...currentLessons,
+      upcoming: currentLessons.upcoming.filter(lesson => lesson.id !== selectedLesson.id)
+    };
+    
+    setCurrentLessons(updatedLessons);
+    setShowDetails(false);
+  };
 
   return (
-    <div className="min-vh-100 bg-light">
-      <div className="container py-4">
-        <div className="d-flex justify-content-between align-items-center mb-4">
-        
-          <div className="d-flex gap-2">
-    
-            <button className="btn btn-success text-white" style={{ backgroundColor: customColor, borderColor: customColor }}>+ Schedule new lesson</button>
-          </div>
+    <div className="ps-widget bgc-white bdrs4 p30 mb60 overflow-hidden position-relative">
+      <div className="lesson-list-view">
+        {/* Upcoming Lessons Section */}
+        <div className="mb40">
+          <h4 className="mb20">Upcoming Lessons</h4>
+          {currentLessons.upcoming.length > 0 ? (
+            <div className="d-flex flex-column gap-3">
+              {currentLessons.upcoming.map((lesson) => (
+                <LessonCard 
+                  key={lesson.id} 
+                  lesson={lesson} 
+                  type="upcoming"
+                  onViewDetails={handleViewDetails}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="alert alert-info">No upcoming lessons scheduled.</div>
+          )}
         </div>
 
-        <div className="d-flex gap-4 mb-4">
-          <button className="btn btn-link p-0 text-decoration-none" style={{ color: customColor }}>
-            <List size={20} className="me-2" />
-            List
-          </button>
-          <button className="btn btn-link text-secondary p-0 text-decoration-none">
-            <Calendar size={20} className="me-2" />
-            Calendar
-          </button>
-        </div>
-
-        <div className="mb-4">
-          <h2 className="h6 text-secondary mb-3">Upcoming lessons</h2>
-          <div className="d-flex flex-column gap-2">
-            {lessons.upcoming.map((lesson, index) => (
-              <div key={index} className="card shadow-sm">
-                <div className="card-body d-flex justify-content-between align-items-center">
-                  <div className="d-flex align-items-center gap-3">
-                    <div className="text-center" style={{width: '3rem'}}>
-                      <div className="text-danger small">{lesson.month}</div>
-                      <div className="fs-5 fw-bold">{lesson.date}</div>
-                    </div>
-                    <div className="fw-medium">{lesson.day}, {lesson.time}</div>
-                  </div>
-                  <div className="d-flex align-items-center gap-3">
-                    <div className="d-flex align-items-center gap-2">
-                      <img src="/api/placeholder/32/32" className="rounded-circle" width="32" height="32" alt="Tutor" />
-                      <div>
-                        <div className="fw-medium">{lesson.tutor}</div>
-                        <div className="small text-secondary">{lesson.subject}</div>
-                      </div>
-                    </div>
-                    <button className="btn btn-link text-secondary p-1">
-                      <MoreHorizontal size={20} />
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
+        {/* Past Lessons Section */}
         <div>
-          <h2 className="h6 text-secondary mb-3">Past lessons</h2>
-          <div className="d-flex flex-column gap-2">
-            {lessons.past.map((lesson, index) => (
-              <div key={index} className="card shadow-sm">
-                <div className="card-body d-flex justify-content-between align-items-center">
-                  <div className="d-flex align-items-center gap-3">
-                    <div className="text-center" style={{width: '3rem'}}>
-                      <div className="text-danger small">{lesson.month}</div>
-                      <div className="fs-5 fw-bold">{lesson.date}</div>
-                    </div>
-                    <div className="fw-medium">{lesson.day}, {lesson.time}</div>
-                  </div>
-                  <div className="d-flex align-items-center gap-3">
-                    <div className="d-flex align-items-center gap-2">
-                      <img src="/api/placeholder/32/32" className="rounded-circle" width="32" height="32" alt="Tutor" />
-                      <div>
-                        <div className="fw-medium">{lesson.tutor}</div>
-                        <div className="small text-secondary">{lesson.subject}</div>
-                      </div>
-                    </div>
-                    <span className="badge" style={{ backgroundColor: `${customColor}20`, color: customColor }}>
-                      Confirmed {lesson.paid}
-                    </span>
-                    <button className="btn btn-link text-secondary p-1">
-                      <MoreHorizontal size={20} />
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+          <h4 className="mb20">Past Lessons</h4>
+          {currentLessons.past.length > 0 ? (
+            <div className="d-flex flex-column gap-3">
+              {currentLessons.past.map((lesson) => (
+                <LessonCard 
+                  key={lesson.id} 
+                  lesson={lesson} 
+                  type="past"
+                  onRateLesson={handleRating}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="alert alert-info">No past lessons found.</div>
+          )}
         </div>
+
+        {/* Pagination */}
+        {(currentLessons.upcoming.length > 0 || currentLessons.past.length > 0) && (
+          <div className="mt30">
+            <Pagination1 />
+          </div>
+        )}
       </div>
-      <Pagination1 />
+
+      {/* Lesson Details Modal */}
+      {showDetails && selectedLesson && (
+        <LessonDetailModal 
+          lesson={selectedLesson}
+          onClose={() => setShowDetails(false)}
+          onCancel={handleCancelLesson}
+          canCancel={canCancel(selectedLesson)}
+        />
+      )}
+
+      {/* Rating Modal */}
+      {showRatingModal && selectedLesson && (
+        <RatingModal 
+          lesson={selectedLesson}
+          ratingValue={ratingValue}
+          setRatingValue={setRatingValue}
+          onSubmit={submitRating}
+          onClose={() => setShowRatingModal(false)}
+        />
+      )}
     </div>
   );
 };

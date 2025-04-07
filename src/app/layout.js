@@ -1,18 +1,17 @@
 import './globals.css'
-import ClientLayout from './[locale]/ClientWrapper'
+import ClientWrapper from './[locale]/ClientWrapper'
+import { defaultLocale } from '@/i18n'
 
 export const metadata = {
   title: 'Prepmee',
   description: 'Prepmee',
 }
 
-export default function RootLayout({ children, params }) {
+export default function RootLayout({ children }) {
   return (
-    <html lang={params.locale}>
+    <html lang={defaultLocale}>
       <body>
-        <ClientLayout>
-          {children}
-        </ClientLayout>
+        {children}
       </body>
     </html>
   )

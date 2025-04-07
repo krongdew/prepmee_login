@@ -1,7 +1,16 @@
 "use client";
 import { Tooltip } from "react-tooltip";
 
-export default function ManageSubjectCard() {
+export default function ManageSubjectCard({ subject, onEdit }) {
+  // ฟังก์ชันสำหรับการกดปุ่มลบ
+  const handleDelete = () => {
+    // สร้างและส่ง event พร้อมกับ ID ของรายวิชาที่ต้องการลบ
+    const deleteEvent = new CustomEvent('delete-subject', {
+      detail: { id: subject.id }
+    });
+    document.dispatchEvent(deleteEvent);
+  };
+
   return (
     <>
       <tr>
@@ -9,47 +18,54 @@ export default function ManageSubjectCard() {
           <div className="freelancer-style1 box-shadow-none row m-0 p-0 align-items-lg-end">
             <div className="d-lg-flex px-0">
               <div className="details mb15-md-md">
-                <h5 className="title mb10">English</h5>
+                <h5 className="title mb10">{subject.name}</h5>
                 <p className="mb-0 fz14 list-inline-item mb5-sm pe-1">
                   <i className="flaticon-place fz16 vam text-thm2 me-1" />{" "}
-                  Bangkok
+                  {subject.location}
                 </p>
                 <p className="mb-0 fz14 list-inline-item mb5-sm pe-1">
                   <i className="flaticon-30-days fz16 vam text-thm2 me-1 bdrl1 pl15 pl0-xs bdrn-xs" />{" "}
-                  1 hour
+                  {subject.duration}
                 </p>
-              
               </div>
             </div>
           </div>
         </th>
         <td className="vam">
-          <span className="fz15 fw400">Web &amp; App Design</span>
+          <span className="fz15 fw400">{subject.mode}</span>
         </td>
         <td className="vam">
-          <span className="fz14 fw400">400</span>
+          <span className="fz14 fw400">{subject.rate}</span>
         </td>
         <td>
           <div className="d-flex">
             <a
               className="icon me-2"
-              id="edit"
+              id={`edit-${subject.id}`}
               data-bs-toggle="modal"
               data-bs-target="#proposalModal"
+              onClick={(e) => {
+                e.preventDefault();
+                onEdit(subject);
+              }}
             >
-              <Tooltip anchorSelect="#edit" className="ui-tooltip" place="top">
+              <Tooltip anchorSelect={`#edit-${subject.id}`} className="ui-tooltip" place="top">
                 Edit
               </Tooltip>
               <span className="flaticon-pencil" />
             </a>
             <a
               className="icon"
-              id="delete"
+              id={`delete-${subject.id}`}
               data-bs-toggle="modal"
               data-bs-target="#deleteModal"
+              onClick={(e) => {
+                e.preventDefault();
+                handleDelete();
+              }}
             >
               <Tooltip
-                anchorSelect="#delete"
+                anchorSelect={`#delete-${subject.id}`}
                 place="top"
                 className="ui-tooltip"
               >

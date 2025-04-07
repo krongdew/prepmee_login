@@ -1,0 +1,66 @@
+/* โค้ดนี้ควรแทรกในส่วน style ของ InvoiceInfo.jsx */
+@media print {
+    /* ยกเลิกการซ่อนเนื้อหาทั้งหมด */
+    body * {
+      visibility: hidden !important;
+      display: none !important;
+    }
+    
+    /* แสดงเฉพาะส่วนที่ต้องการพิมพ์ */
+    .printable-content,
+    .printable-content * {
+      visibility: visible !important;
+      display: block !important;
+    }
+    
+    /* ตำแหน่งของส่วนที่พิมพ์ */
+    .printable-content {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
+    
+    /* ซ่อนปุ่มและส่วนที่ไม่ต้องการให้พิมพ์ */
+    .not-printable {
+      display: none !important;
+    }
+    
+    /* เพิ่มสไตล์สำหรับตาราง */
+    table, tr, td, th, thead, tbody, tfoot {
+      visibility: visible !important;
+      display: table !important;
+    }
+    
+    table {
+      display: table !important;
+      width: 100% !important;
+    }
+    
+    tr {
+      display: table-row !important;
+    }
+    
+    td, th {
+      display: table-cell !important;
+    }
+    
+    thead {
+      display: table-header-group !important;
+    }
+    
+    tbody {
+      display: table-row-group !important;
+    }
+    
+    tfoot {
+      display: table-footer-group !important;
+    }
+    
+    /* แก้ไขปัญหาตัวอักษรขาวบนพื้นหลังสี */
+    .badge {
+      color: black !important;
+      border: 1px solid #ccc;
+    }
+  }

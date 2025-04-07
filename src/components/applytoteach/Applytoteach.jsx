@@ -22,7 +22,7 @@ export default function Page() {
   const [submitStatus, setSubmitStatus] = useState('');
 
   const subjects = [
-    'Mathematics', 'Physics', 'Chemistry', 'Biology', 'Science', 'Social','English', 'Thai', 'Chinese', 'Korean', 'Japanese', 'French', 'German','History', 
+    'Mathematics', 'Physics', 'Chemistry', 'Biology', 'Science', 'Social','English', 'Thai', 'Korean', 'Japanese', 'French', 'German','History', 
     'Coding & Programming', 'Chinese', 'Art', 'Music', 'Singing','Dance','Others'
   ];
 

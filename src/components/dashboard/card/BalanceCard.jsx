@@ -2,7 +2,7 @@ export default function BalanceCard({ data }) {
     return (
       <>
         <tr>
-          <th scope="row">${data.amount.toFixed(3)}</th>
+          <th scope="row">{data.amount.toFixed(2)}</th>
           <td className="vam">{data.date}</td>
           <td className="vam">{data.method}</td>
           <td className="vam">

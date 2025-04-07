@@ -1,8 +1,7 @@
 "use client";
 import ServiceDetailComment1 from "../element/ServiceDetailComment1";
-
 import ServiceDetailReviewInfo1 from "../element/ServiceDetailReviewInfo1";
-import { Sticky, StickyContainer } from "react-sticky";
+import { Sticky, StickyContainer } from "./StickyComponents";
 import useScreen from "@/hook/useScreen";
 import ServiceContactWidget1 from "../element/ServiceContactWidget1";
 import TutorVideo from "../element/TutorVideo";
@@ -120,11 +119,14 @@ export default function ServiceDetail3() {
               <div className="col-lg-4">
                 <div className="column">
                   {isMatchedScreen ? (
-                    <Sticky>
-                      {({ style }) => (
-                        <div className="scrollbalance-inner" style={style}>
+                    <Sticky topOffset={100}>
+                      {({ isSticky, distanceFromTop }) => (
+                        <div className="scrollbalance-inner" style={isSticky ? { 
+                          position: 'fixed', 
+                          top: '100px',
+                          width: 'inherit'
+                        } : {}}>
                           <div className="blog-sidebar ms-lg-auto">
-                          
                             <ServiceContactWidget1 />
                           </div>
                         </div>
@@ -133,7 +135,6 @@ export default function ServiceDetail3() {
                   ) : (
                     <div className="scrollbalance-inner">
                       <div className="blog-sidebar ms-lg-auto">
-                    
                         <ServiceContactWidget1 />
                       </div>
                     </div>

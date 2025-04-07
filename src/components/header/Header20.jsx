@@ -172,6 +172,14 @@ export default function Header20() {
                                                     {t('nav.signin')}
                                                 </Link>
                                                 <Link
+                                                    className={`login-info mr15-lg mr30 ${
+                                                        pathname === `/${currentLocale}/login` ? "ui-active" : ""
+                                                    }`}
+                                                    href={`/${currentLocale}/tutor_login`}
+                                                >
+                                                    {t('nav.tutorsignin')}
+                                                </Link>
+                                                <Link
                                                     className="ud-btn btn-thm add-joining"
                                                     href={`/${currentLocale}/register`}
                                                 >
@@ -180,6 +188,7 @@ export default function Header20() {
                                             </>
                                         ) : (
                                             <div className="position-relative" ref={dropdownRef}>
+                                                <label style={{marginRight:10}}>0.00 ฿</label>
                                                 <button 
                                                     className="ud-btn btn-thm add-joining"
                                                     onClick={() => setShowUserDropdown(!showUserDropdown)}

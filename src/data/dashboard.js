@@ -19,15 +19,15 @@ export const dasboardNavigation = [
   },
   {
     id: 4,
-    name: "Receipt",
-    icon: "flaticon-receipt",
-    path: "/invoice",
-  },
-  {
-    id: 5,
     name: "Balance",
     icon: "flaticon-dollar",
     path: "/balance",
+  },
+  {
+    id: 5,
+    name: "Receipt",
+    icon: "flaticon-receipt",
+    path: "/invoice",
   },
   {
     id: 6,

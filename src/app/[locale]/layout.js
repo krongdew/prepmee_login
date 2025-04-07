@@ -1,4 +1,4 @@
-//src/app/[locale]/layout.js
+// src/app/[locale]/layout.js
 import { NextIntlClientProvider } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { locales } from '@/i18n';
@@ -16,7 +16,11 @@ async function getMessages(locale) {
   }
 }
 
-export default async function LocaleLayout({ children, params: { locale } }) {
+export default async function LocaleLayout({ children, params }) {
+  // In Next.js 15, params is a promise that needs to be awaited
+  const resolvedParams = await params;
+  const locale = resolvedParams.locale;
+
   if (!locales.includes(locale)) {
     notFound();
   }
@@ -25,9 +29,7 @@ export default async function LocaleLayout({ children, params: { locale } }) {
 
   return (
     <NextIntlClientProvider messages={messages} locale={locale}>
-      <ClientWrapper>
-        {children}
-      </ClientWrapper>
+      <ClientWrapper>{children}</ClientWrapper>
     </NextIntlClientProvider>
   );
 }

@@ -1,4 +1,35 @@
-export default function DeleteModal() {
+"use client";
+import { useState, useEffect } from "react";
+
+export default function DeleteModal({ onConfirm }) {
+  const [subjectId, setSubjectId] = useState(null);
+
+  // ฟังก์ชันนี้จะถูกเรียกเมื่อมีการกดปุ่มลบและต้องการยืนยัน
+  const handleDelete = () => {
+    if (onConfirm && subjectId) {
+      onConfirm(subjectId);
+    }
+    // เราไม่ต้องปิดโมดัลแบบเดิมแล้ว เพราะเราใช้ data-bs-dismiss attribute
+  };
+
+  // เพิ่ม event listener สำหรับการรับ ID ของวิชาที่ต้องการลบ
+  useEffect(() => {
+    // สร้างฟังก์ชัน handler ที่จะรับ ID จากเหตุการณ์
+    const handleDeleteEvent = (event) => {
+      if (event.detail && event.detail.id) {
+        setSubjectId(event.detail.id);
+      }
+    };
+
+    // เพิ่ม event listener
+    document.addEventListener('delete-subject', handleDeleteEvent);
+
+    // ทำความสะอาด event listener เมื่อ component ถูก unmount
+    return () => {
+      document.removeEventListener('delete-subject', handleDeleteEvent);
+    };
+  }, []);
+
   return (
     <>
       <div
@@ -32,6 +63,7 @@ export default function DeleteModal() {
                   className="ud-btn bg-danger text-white mb25"
                   data-bs-dismiss="modal"
                   aria-label="Close"
+                  onClick={handleDelete}
                 >
                   Delete
                   <i className="fal fa-arrow-right-long" />

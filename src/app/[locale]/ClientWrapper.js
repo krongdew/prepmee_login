@@ -1,4 +1,3 @@
-//src/app/[locale]/ClientWrapper.js
 "use client";
 
 import { DM_Sans } from "next/font/google";
@@ -24,13 +23,27 @@ const dmSans = DM_Sans({
 export default function ClientWrapper({ children }) {
   const path = usePathname();
 
-  // Initialize WOW.js
+  // Initialize WOW.js - แก้ไขโค้ดตรงนี้ใหม่
   useEffect(() => {
-    const { WOW } = require("wowjs");
-    const wow = new WOW({
-      live: false,
-    });
-    wow.init();
+    if (typeof window !== "undefined") {
+      // วิธีที่ 1: ลองดึง class WOW โดยตรงจาก global scope หลังจาก import script
+      const loadWow = async () => {
+        // ต้องมั่นใจว่าได้ติดตั้งไลบรารีแล้ว (npm install wowjs)
+        await import('wowjs/dist/wow.js');
+        
+        // หากมีการโหลด script สำเร็จ จะสามารถเข้าถึง WOW ที่ window ได้
+        if (window.WOW) {
+          const wow = new window.WOW({
+            live: false,
+          });
+          wow.init();
+        } else {
+          console.error("WOW library not found on window object");
+        }
+      };
+      
+      loadWow();
+    }
   }, [path]);
 
   return (

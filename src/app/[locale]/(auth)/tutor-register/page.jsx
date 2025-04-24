@@ -5,7 +5,7 @@ import Footer8 from "@/components/footer/Footer8";
 import Header20 from "@/components/header/Header20";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
-import SocialLoginButtons from '@/components/auth/SocialLoginButtons';
+import SocialLoginButtons from '@/components/auth/SocialLoginButton';
 
 export default function TutorRegisterPage() {
     const { registerTutor, error: authError, loading } = useAuth();

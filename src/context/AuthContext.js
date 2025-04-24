@@ -1,107 +1,3 @@
-// // src/context/AuthContext.js
-// 'use client';
-
-// import React, { createContext, useState, useContext, useEffect } from 'react';
-// import { authService } from '@/services/api';
-// import { useRouter } from 'next/navigation';
-
-// const AuthContext = createContext();
-
-// export const AuthProvider = ({ children }) => {
-//   const [user, setUser] = useState(null);
-//   const [loading, setLoading] = useState(true);
-//   const [error, setError] = useState(null);
-//   const router = useRouter();
-
-//   useEffect(() => {
-//     // Check if user is logged in
-//     const checkUserLoggedIn = async () => {
-//       try {
-//         const token = localStorage.getItem('accessToken');
-//         if (token) {
-//           const userData = await authService.getProfile();
-//           setUser(userData);
-//         }
-//       } catch (error) {
-//         console.error('Auth check failed:', error);
-//         // Clear invalid token
-//         authService.logout();
-//       } finally {
-//         setLoading(false);
-//       }
-//     };
-
-//     checkUserLoggedIn();
-//   }, []);
-
-//   // Register user
-//   const register = async (userData) => {
-//     setLoading(true);
-//     setError(null);
-//     try {
-//       const data = await authService.register(userData);
-//       // Redirect to login page in the same locale as current path
-//       const locale = window.location.pathname.split('/')[1];
-//       router.push(`/${locale}/login`);
-//       return data;
-//     } catch (error) {
-//       setError(error.message);
-//       throw error;
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   // Login user
-//   const login = async (email, password) => {
-//     setLoading(true);
-//     setError(null);
-//     try {
-//       const loginData = await authService.login(email, password);
-//       console.log('Login successful, data:', loginData); // Debug: log successful login
-      
-//       try {
-//         // Try to get profile data if login was successful
-//         const userData = await authService.getProfile();
-//         console.log('Profile data retrieved:', userData); // Debug: log profile data
-//         setUser(userData);
-//       } catch (profileError) {
-//         console.error('Failed to get profile after login:', profileError);
-//         // Don't throw an error here - if login was successful but profile fetch fails,
-//         // we still want to redirect the user to the dashboard
-//       }
-      
-//       // Redirect to dashboard page in the same locale as current path
-//       const locale = window.location.pathname.split('/')[1];
-//       console.log(`Redirecting to dashboard: /${locale}/dashboard`);
-//       router.push(`/${locale}/dashboard`);
-//       return loginData;
-//     } catch (error) {
-//       console.error('Login error in context:', error); // Debug: log login error
-//       setError(error.message);
-//       throw error;
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   // Logout user
-//   const logout = () => {
-//     authService.logout();
-//     setUser(null);
-//     router.push('/login');
-//   };
-
-//   return (
-//     <AuthContext.Provider value={{ user, loading, error, register, login, logout }}>
-//       {children}
-//     </AuthContext.Provider>
-//   );
-// };
-
-// export const useAuth = () => useContext(AuthContext);
-
-// src/context/AuthContext.js
 'use client';
 
 import React, { createContext, useState, useContext, useEffect, useCallback } from 'react';
@@ -121,7 +17,7 @@ export const AuthProvider = ({ children }) => {
 
   // Check if path is for tutor dashboard
   const isTutorPath = useCallback(() => {
-    return pathname.includes('(dashboard_tutor)');
+    return pathname.includes('(dashboard_tutor)') || pathname.includes('/tutor-dashboard');
   }, [pathname]);
 
   // Get correct role based on path or stored value
@@ -136,46 +32,46 @@ export const AuthProvider = ({ children }) => {
     return `/${locale}/${role === 'tutor' ? 'tutor-dashboard' : 'dashboard'}`;
   }, [getRole]);
 
-  // ส่วนของการ checkUserLoggedIn
-const checkUserLoggedIn = useCallback(async () => {
-  try {
-    setLoading(true);
-    const role = getRole();
-    const storedUserType = authService.getUserType();
-    
-    // If path and stored user type don't match, clear tokens
-    if (storedUserType && storedUserType !== role) {
-      authService.clearTokens(storedUserType);
-    }
-    
-    // Try to get a valid token for the current role
-    const token = await authService.getValidToken(role);
-    
-    if (token) {
-      // Get user profile based on role
-      let userData;
-      if (role === 'tutor') {
-        userData = await authService.getTutorProfile();
-      } else {
-        userData = await authService.getStudentProfile();
+  // Check if user is logged in
+  const checkUserLoggedIn = useCallback(async () => {
+    try {
+      setLoading(true);
+      const role = getRole();
+      const storedUserType = authService.getUserType();
+      
+      // If path and stored user type don't match, clear tokens
+      if (storedUserType && storedUserType !== role) {
+        authService.clearTokens(storedUserType);
       }
       
-      setUser(userData);
-      setUserType(role);
-      // ปิดการตรวจสอบ email_verified ชั่วคราวและกำหนดให้เป็น true เสมอ
-      setEmailVerified(true); // เปลี่ยนจาก userData.email_verified || false
-    } else {
+      // Try to get a valid token for the current role
+      const token = await authService.getValidToken(role);
+      
+      if (token) {
+        // Get user profile based on role
+        let userData;
+        if (role === 'tutor') {
+          userData = await authService.getTutorProfile();
+        } else {
+          userData = await authService.getStudentProfile();
+        }
+        
+        setUser(userData);
+        setUserType(role);
+        // Always set email verified to true - if we can get profile data, user is verified
+        setEmailVerified(true);
+      } else {
+        setUser(null);
+        setUserType(null);
+      }
+    } catch (error) {
+      console.error('Auth check failed:', error);
       setUser(null);
       setUserType(null);
+    } finally {
+      setLoading(false);
     }
-  } catch (error) {
-    console.error('Auth check failed:', error);
-    setUser(null);
-    setUserType(null);
-  } finally {
-    setLoading(false);
-  }
-}, [getRole]);
+  }, [getRole]);
 
   // Initial auth check on mount
   useEffect(() => {
@@ -204,8 +100,9 @@ const checkUserLoggedIn = useCallback(async () => {
     setError(null);
     try {
       const data = await authService.registerStudent(userData);
+      // After registration, redirect to login page instead of verify-email
       const locale = window.location.pathname.split('/')[1];
-      router.push(`/${locale}/verify-email?email=${encodeURIComponent(userData.email)}&role=student`);
+      router.push(`/${locale}/login?status=success&message=${encodeURIComponent('Registration successful! Please log in.')}`);
       return data;
     } catch (error) {
       setError(error.message);
@@ -221,8 +118,9 @@ const checkUserLoggedIn = useCallback(async () => {
     setError(null);
     try {
       const data = await authService.registerTutor(userData);
+      // After registration, redirect to login page instead of verify-email
       const locale = window.location.pathname.split('/')[1];
-      router.push(`/${locale}/verify-email?email=${encodeURIComponent(userData.email)}&role=tutor`);
+      router.push(`/${locale}/tutor-login?status=success&message=${encodeURIComponent('Application submitted! Please log in.')}`);
       return data;
     } catch (error) {
       setError(error.message);
@@ -243,15 +141,11 @@ const checkUserLoggedIn = useCallback(async () => {
       const userData = await authService.getStudentProfile();
       setUser(userData);
       setUserType('student');
-      setEmailVerified(userData.email_verified || false);
+      setEmailVerified(true); // Always set to true
       
-      // Redirect based on email verification status
+      // Always redirect to dashboard without checking email verification
       const locale = window.location.pathname.split('/')[1];
-      if (!userData.email_verified) {
-        router.push(`/${locale}/verify-email?email=${encodeURIComponent(email)}&role=student`);
-      } else {
-        router.push(getDashboardPath(locale));
-      }
+      router.push(getDashboardPath(locale));
       
       return loginData;
     } catch (error) {
@@ -273,15 +167,11 @@ const checkUserLoggedIn = useCallback(async () => {
       const userData = await authService.getTutorProfile();
       setUser(userData);
       setUserType('tutor');
-      setEmailVerified(userData.email_verified || false);
+      setEmailVerified(true); // Always set to true
       
-      // Redirect based on email verification status
+      // Always redirect to dashboard without checking email verification
       const locale = window.location.pathname.split('/')[1];
-      if (!userData.email_verified) {
-        router.push(`/${locale}/verify-email?email=${encodeURIComponent(email)}&role=tutor`);
-      } else {
-        router.push(getDashboardPath(locale));
-      }
+      router.push(getDashboardPath(locale));
       
       return loginData;
     } catch (error) {
@@ -303,9 +193,9 @@ const checkUserLoggedIn = useCallback(async () => {
       const userData = await authService.getStudentProfile();
       setUser(userData);
       setUserType('student');
-      setEmailVerified(userData.email_verified || false);
+      setEmailVerified(true); // Always set to true
       
-      // Redirect to dashboard (social logins typically have verified emails)
+      // Always redirect to dashboard
       const locale = window.location.pathname.split('/')[1];
       router.push(getDashboardPath(locale));
       
@@ -329,9 +219,9 @@ const checkUserLoggedIn = useCallback(async () => {
       const userData = await authService.getTutorProfile();
       setUser(userData);
       setUserType('tutor');
-      setEmailVerified(userData.email_verified || false);
+      setEmailVerified(true); // Always set to true
       
-      // Redirect to dashboard (social logins typically have verified emails)
+      // Always redirect to dashboard
       const locale = window.location.pathname.split('/')[1];
       router.push(getDashboardPath(locale));
       
@@ -344,7 +234,7 @@ const checkUserLoggedIn = useCallback(async () => {
     }
   };
 
-  // Request email verification
+  // Request email verification - keep for future use if needed
   const requestEmailVerification = async (email, role) => {
     setLoading(true);
     setError(null);
@@ -358,7 +248,7 @@ const checkUserLoggedIn = useCallback(async () => {
     }
   };
 
-  // Verify email
+  // Verify email - keep for future use if needed
   const verifyEmail = async (email, code, role) => {
     setLoading(true);
     setError(null);

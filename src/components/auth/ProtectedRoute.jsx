@@ -6,7 +6,7 @@ import { useAuth } from '@/context/AuthContext';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 
 export default function ProtectedRoute({ children, requiredRole = null }) {
-  const { user, loading, userType, isAuthenticated } = useAuth(); // ลบ emailVerified ออก
+  const { user, loading, userType, isAuthenticated } = useAuth(); // ไม่ใช้ emailVerified
   const router = useRouter();
   const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
@@ -50,15 +50,8 @@ export default function ProtectedRoute({ children, requiredRole = null }) {
       return;
     }
 
-    // ลบโค้ดตรวจสอบการยืนยันอีเมลออกชั่วคราว
-    /* 
-    // If email is not verified
-    if (isAuthenticated && !emailVerified) {
-      console.log('Email not verified, redirecting to verification page');
-      router.push(`/${locale}/verify-email?email=${encodeURIComponent(user.email)}&role=${userType}`);
-      return;
-    }
-    */
+    // ลบโค้ดตรวจสอบการยืนยันอีเมลออกทั้งหมด
+    // ไม่มีการตรวจสอบ emailVerified และไม่มีการ redirect ไปยังหน้า verify-email
   }, [user, loading, userType, router, mounted, pathname, isAuthenticated, requiredRole]);
 
   // Not showing content until we're confident about auth state
@@ -72,7 +65,7 @@ export default function ProtectedRoute({ children, requiredRole = null }) {
     );
   }
 
-  // ลบการเช็ค emailVerified ออก
+  // ตรวจสอบเฉพาะการเข้าสู่ระบบ ไม่ตรวจสอบการยืนยันอีเมล
   if (!isAuthenticated) {
     return (
       <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>

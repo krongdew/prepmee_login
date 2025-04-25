@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useRef, useEffect } from 'react';
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/context/AuthContext_backup";
 
 const DashboardHeader = () => {
   const toggle = toggleStore((state) => state.dashboardSlidebarToggleHandler);

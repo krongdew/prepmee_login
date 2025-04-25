@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import BottomToTop from "@/components/button/BottomToTop";
 import SearchModal1 from "@/components/modal/SearchModal1";
 import NavSidebar from "@/components/sidebar/NavSidebar";
-import { AuthProvider } from '@/context/AuthContext';
+import { AuthProvider } from '@/context/AuthContext_backup';
 import "react-tooltip/dist/react-tooltip.css";
 
 // Initialize Bootstrap on client side

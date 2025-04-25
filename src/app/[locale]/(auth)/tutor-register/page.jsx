@@ -1,10 +1,11 @@
+//prepmee_website\src\app\[locale]\(auth)\tutor-register\page.jsx
 'use client';
 
 import { useState, useEffect } from "react";
 import Footer8 from "@/components/footer/Footer8";
 import Header20 from "@/components/header/Header20";
 import Link from "next/link";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/context/AuthContext_backup";
 import SocialLoginButtons from '@/components/auth/SocialLoginButton';
 
 export default function TutorRegisterPage() {
@@ -272,7 +273,7 @@ export default function TutorRegisterPage() {
                                         <p className="text mt20">
                                             Already have a tutor account?{" "}
                                             <Link
-                                                href="/tutor-login"
+                                                href="/tutor_login"
                                                 className="text-thm"
                                             >
                                                 Log In!

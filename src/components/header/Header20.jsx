@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useTranslations, useLocale } from 'next-intl'; // เพิ่ม useLocale
-import { useAuth } from '@/context/AuthContext';
+import { useAuth } from '@/context/AuthContext_backup';
 import Mega from "./Mega";
 import Navigation from "./Navigation";
 import MobileNavigation2 from "./MobileNavigation2";

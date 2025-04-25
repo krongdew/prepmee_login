@@ -2,7 +2,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useAuth } from '@/context/AuthContext';
+import { useAuth } from '@/context/AuthContext_backup';
 
 export default function DebugAuthPage() {
   const { user, loading, error } = useAuth();

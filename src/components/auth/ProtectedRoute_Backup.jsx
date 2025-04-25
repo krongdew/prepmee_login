@@ -1,0 +1,84 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
+import { useAuth } from '@/context/AuthContext_backup';
+import LoadingSpinner from '@/components/common/LoadingSpinner';
+
+export default function ProtectedRoute({ children, requiredRole = null }) {
+  const { user, loading, userType, isAuthenticated } = useAuth(); // ไม่ใช้ emailVerified
+  const router = useRouter();
+  const pathname = usePathname();
+  const [mounted, setMounted] = useState(false);
+
+  // Determine if path is for tutor dashboard
+  const isTutorPath = () => {
+    return pathname.includes('(dashboard_tutor)') || pathname.includes('/tutor-dashboard');
+  };
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted || loading) return;
+
+    const locale = window.location.pathname.split('/')[1];
+    const currentRole = isTutorPath() ? 'tutor' : 'student';
+    
+    // If specific role is required and user doesn't match
+    if (requiredRole && userType !== requiredRole) {
+      console.log(`Required role: ${requiredRole}, current user: ${userType}`);
+      const loginPath = requiredRole === 'tutor' ? '/tutor_login' : '/login';
+      router.push(`/${locale}${loginPath}`);
+      return;
+    }
+
+    // If user is not authenticated
+    if (!isAuthenticated) {
+      console.log('Not authenticated, redirecting to login');
+      const loginPath = currentRole === 'tutor' ? '/tutor_login' : '/login';
+      router.push(`/${locale}${loginPath}`);
+      return;
+    }
+
+    // If role mismatch with path
+    if (userType && userType !== currentRole) {
+      console.log(`Role mismatch: User is ${userType} but path is for ${currentRole}`);
+      const dashboardPath = userType === 'tutor' ? '/tutor-dashboard' : '/dashboard';
+      router.push(`/${locale}${dashboardPath}`);
+      return;
+    }
+
+    // ลบโค้ดตรวจสอบการยืนยันอีเมลออกทั้งหมด
+    // ไม่มีการตรวจสอบ emailVerified และไม่มีการ redirect ไปยังหน้า verify-email
+  }, [user, loading, userType, router, mounted, pathname, isAuthenticated, requiredRole]);
+
+  // Not showing content until we're confident about auth state
+  if (!mounted || loading) {
+    return (
+      <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
+        <div className="spinner-border text-primary" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
+  }
+
+  // ตรวจสอบเฉพาะการเข้าสู่ระบบ ไม่ตรวจสอบการยืนยันอีเมล
+  if (!isAuthenticated) {
+    return (
+      <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
+        <div className="text-center">
+          <div className="spinner-border text-primary mb-3" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+          <p>Verifying your session...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // All checks passed, render the protected content
+  return <>{children}</>;
+}

@@ -25,7 +25,7 @@ export default function DashboardSidebar() {
             </div>
           ))}
 
-          <p className="fz15 fw400 ff-heading pl30 mt30">Tutor Menu</p>
+          <p className="fz15 fw400 ff-heading pl30 mt30">Account</p>
 
           {dasboardNavigation.slice(5, 8).map((item,i) => (
             <div key={ i } className="sidebar_list_item mb-1">
@@ -41,7 +41,7 @@ export default function DashboardSidebar() {
             </div>
           ))}
 
-          <p className="fz15 fw400 ff-heading pl30 mt30">Account</p>
+          
           {dasboardNavigation.slice(8, 10).map((item,i) => (
             <div key={ i } className="sidebar_list_item mb-1">
               <Link

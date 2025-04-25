@@ -1,6 +1,6 @@
 'use client';
 
-import ProtectedRoute from "@/components/auth/ProtectedRoute";
+import ProtectedRoute from "@/components/auth/ProtectedRoute_Backup";
 
 export default function DashboardLayout({ children }) {
   return (

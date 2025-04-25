@@ -39,7 +39,7 @@
 //src/components/dashboard/section/DashboardInfo.jsx
 'use client';
 
-import { useAuth } from '@/context/AuthContext';
+import { useAuth } from '@/context/AuthContext_backup';
 import React from "react";
 import DashboardNavigation from "../header/DashboardNavigation";
 import MyLessonInfo from "../section/MyLessonInfo";

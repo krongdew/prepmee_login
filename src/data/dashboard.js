@@ -31,36 +31,12 @@ export const dasboardNavigation = [
   },
   {
     id: 6,
-    name: "Manage Schedule",
-    icon: "flaticon-calendar",
-    path: "/tutorschedule",
-  },
-  {
-    id: 7,
-    name: "Manage Subjects",
-    icon: "flaticon-content",
-    path: "/manage-subjects",
-  },
-  {
-    id: 8,
-    name: "Statement & Payout",
-    icon: "flaticon-web",
-    path: "/statements",
-  },
-  {
-    id: 9,
-    name: "Tutor Profile",
-    icon: "flaticon-photo",
-    path: "/tutorprofile",
-  },
-  {
-    id: 10,
     name: "My Profile",
     icon: "flaticon-photo",
     path: "/my-profile",
   },
   {
-    id: 11,
+    id: 7,
     name: "Logout",
     icon: "flaticon-logout",
     path: "/login",

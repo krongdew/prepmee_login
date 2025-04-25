@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import Footer8 from "@/components/footer/Footer8";
 import Header20 from "@/components/header/Header20";
 import Link from "next/link";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/context/AuthContext_backup";
 
 export default function ForgotPasswordPage() {
     const { requestPasswordReset, resetPassword, loading, error: authError } = useAuth();
@@ -161,7 +161,7 @@ export default function ForgotPasswordPage() {
             // Add a link to login page after successful reset
             setTimeout(() => {
                 const locale = window.location.pathname.split('/')[1];
-                const loginPath = role === 'tutor' ? '/tutor-login' : '/login';
+                const loginPath = role === 'tutor' ? '/tutor_login' : '/login';
                 window.location.href = `/${locale}${loginPath}?status=success&message=${encodeURIComponent('Your password has been reset successfully')}`;
             }, 2000);
         } catch (error) {
@@ -429,7 +429,7 @@ export default function ForgotPasswordPage() {
                                         <p className="mb10">
                                             Remember your password?{" "}
                                             <Link 
-                                                href={role === 'tutor' ? "/tutor-login" : "/login"} 
+                                                href={role === 'tutor' ? "/tutor_login" : "/login"} 
                                                 className="text-thm"
                                             >
                                                 Log In

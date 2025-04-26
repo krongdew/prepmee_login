@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import Footer8 from "@/components/footer/Footer8";
 import Header20 from "@/components/header/Header20";
 import Link from "next/link";
-import { useAuth } from "@/context/AuthContext_backup";
+import { useAuth } from "@/context/AuthContext";
 
 export default function ForgotPasswordPage() {
     const { requestPasswordReset, resetPassword, loading, error: authError } = useAuth();

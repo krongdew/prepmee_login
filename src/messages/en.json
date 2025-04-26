@@ -5,7 +5,9 @@
       "become_tutor": "Tutor",
       "signin": "Sign in",
       "tutorsignin": "Tutor Sign in",
-      "join": "Join"
+      "join": "Join",
+       "loginTitle": "Student Log In",
+      "loginSubtitle": "Access your student account to find tutors and lessons"
     }
   },
     "hero": {

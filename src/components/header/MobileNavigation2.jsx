@@ -1,9 +1,10 @@
+//src/components/header/MobileNavigation2.jsx
 "use client";
 
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useAuth } from "@/context/AuthContext_backup";
+import { useAuth } from '@/context/AuthContext';
 import { useState, useEffect } from "react";
 
 export default function MobileNavigation2() {

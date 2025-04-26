@@ -14,8 +14,8 @@ export default function VerifyEmailPage() {
         user, 
         emailVerified, 
         loading,
-        checkEmailVerification, 
-        requestEmailVerification 
+        requestEmailVerification, 
+        checkEmailVerification 
     } = useAuth();
     
     const [email, setEmail] = useState("");
@@ -24,7 +24,7 @@ export default function VerifyEmailPage() {
     const [verificationChecking, setVerificationChecking] = useState(true);
     const [verificationError, setVerificationError] = useState("");
 
-    // ดึงข้อมูลจาก URL parameters
+    // Extract data from URL parameters
     useEffect(() => {
         const emailParam = searchParams.get('email');
         const roleParam = searchParams.get('role');
@@ -40,14 +40,14 @@ export default function VerifyEmailPage() {
         }
     }, [searchParams, user]);
 
-    // ตรวจสอบสถานะการยืนยันอีเมลเมื่อโหลดหน้า
+    // Check email verification status on page load
     useEffect(() => {
         const checkVerification = async () => {
             setVerificationChecking(true);
             try {
-                const isVerified = await checkEmailVerification();
+                const isVerified = await checkEmailVerification(role);
                 
-                // ถ้ายืนยันแล้ว ให้ redirect ไปยัง dashboard
+                // If verified, redirect to dashboard
                 if (isVerified) {
                     const locale = window.location.pathname.split('/')[1];
                     const dashboardPath = role === 'tutor' ? 'tutor-dashboard' : 'dashboard';
@@ -63,7 +63,7 @@ export default function VerifyEmailPage() {
         checkVerification();
     }, [role, router, checkEmailVerification]);
 
-    // ขอส่งอีเมลยืนยันอีกครั้ง
+    // Request email verification
     const handleResendVerification = async () => {
         if (!email) {
             setVerificationError("Email address is required");
@@ -84,8 +84,8 @@ export default function VerifyEmailPage() {
 
     // Handler to go directly to dashboard
     const handleGoToDashboard = async () => {
-        // เช็คอีกครั้งว่ายืนยันอีเมลแล้วจริงๆ
-        const isVerified = await checkEmailVerification();
+        // Double-check verification status before going to dashboard
+        const isVerified = await checkEmailVerification(role);
         
         if (isVerified) {
             const locale = window.location.pathname.split('/')[1];

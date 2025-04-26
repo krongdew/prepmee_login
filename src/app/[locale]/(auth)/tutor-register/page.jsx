@@ -5,8 +5,9 @@ import { useState, useEffect } from "react";
 import Footer8 from "@/components/footer/Footer8";
 import Header20 from "@/components/header/Header20";
 import Link from "next/link";
-import { useAuth } from "@/context/AuthContext_backup";
+import { useAuth } from "@/context/AuthContext";
 import SocialLoginButtons from '@/components/auth/SocialLoginButton';
+import authService from "@/services/authService";
 
 export default function TutorRegisterPage() {
     const { registerTutor, error: authError, loading } = useAuth();
@@ -41,20 +42,14 @@ export default function TutorRegisterPage() {
         const fetchData = async () => {
             setDataLoading(true);
             try {
-                // Fetch provinces
-                const provincesResponse = await fetch('https://core-dev.prepmee.co/api/v1/common/provinces');
-                const provincesData = await provincesResponse.json();
+                const commonData = await authService.getCommonData();
                 
-                if (provincesData.result) {
-                    setProvinces(provincesData.result);
+                if (commonData.subjects) {
+                    setAvailableSubjects(commonData.subjects);
                 }
                 
-                // Fetch subjects
-                const subjectsResponse = await fetch('https://core-dev.prepmee.co/api/v1/common/subjects');
-                const subjectsData = await subjectsResponse.json();
-                
-                if (subjectsData.result) {
-                    setAvailableSubjects(subjectsData.result);
+                if (commonData.provinces) {
+                    setProvinces(commonData.provinces);
                 }
             } catch (error) {
                 console.error('Error fetching data:', error);

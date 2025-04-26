@@ -5,7 +5,9 @@
       "become_tutor": "ติวเตอร์",
       "signin": "เข้าสู่ระบบ",
       "tutorsignin": "เข้าสู่ระบบติวเตอร์",
-      "join": "สมัครสมาชิก"
+      "join": "สมัครสมาชิก",
+       "loginTitle": "Student Log In",
+  "loginSubtitle": "Access your student account to find tutors and lessons"
     }
     },
     "hero": {

@@ -1,3 +1,4 @@
+//src/components/header/Header20.jsx
 "use client";
 
 import { useState, useEffect, useRef } from "react";
@@ -5,7 +6,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useTranslations, useLocale } from 'next-intl'; // เพิ่ม useLocale
-import { useAuth } from '@/context/AuthContext_backup';
+// Update this import in Header20.jsx
+import { useAuth } from '@/context/AuthContext';  // Remove the _backup suffix
 import Mega from "./Mega";
 import Navigation from "./Navigation";
 import MobileNavigation2 from "./MobileNavigation2";

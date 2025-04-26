@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import Footer8 from "@/components/footer/Footer8";
 import Header20 from "@/components/header/Header20";
 import Link from "next/link";
-import { useAuth } from "@/context/AuthContext_backup";
+import { useAuth } from "@/context/AuthContext";
 import SocialLoginButtons from '@/components/auth/SocialLoginButton';
 
 export default function TutorLoginPage() {
@@ -25,6 +25,7 @@ export default function TutorLoginPage() {
     useEffect(() => {
         const status = searchParams.get('status');
         const message = searchParams.get('message');
+        const error = searchParams.get('error');
         
         if (status === 'success' && message) {
             setStatusMessage({ type: 'success', text: decodeURIComponent(message) });
@@ -35,6 +36,8 @@ export default function TutorLoginPage() {
                 type: 'warning', 
                 text: 'Please verify your email before logging in.' 
             });
+        } else if (error) {
+            setStatusMessage({ type: 'error', text: decodeURIComponent(error) });
         }
     }, [searchParams]);
 

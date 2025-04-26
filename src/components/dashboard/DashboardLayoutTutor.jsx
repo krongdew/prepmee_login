@@ -4,7 +4,7 @@ import toggleStore from "@/store/toggleStore";
 import DashboardHeader from "./header/DashboardHeader";
 import DashboardSidebar from "./sidebar/DashboardSidebarTutor";
 import DashboardFooter from "./footer/DashboardFooter";
-import ProtectedRoute from "@/components/auth/ProtectedRoute_Backup";
+import ProtectedRoute from "@/components/auth/ProtectedRoute";
 
 export default function DashboardLayout({ children }) {
   const isActive = toggleStore((state) => state.isDasboardSidebarActive);

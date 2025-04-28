@@ -10,71 +10,35 @@ import { useAuth } from "@/context/AuthContext";
 import SocialLoginButtons from '@/components/auth/SocialLoginButton';
 
 export default function StudentLoginPage() {
-    const { loginStudent, error: authError, loading } = useAuth();
-    const searchParams = useSearchParams();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
     
-    const [formData, setFormData] = useState({
-        email: "",
-        password: "",
-        rememberMe: true
-    });
-    const [formError, setFormError] = useState("");
-    const [statusMessage, setStatusMessage] = useState("");
-
-    // Check for any status messages passed via URL params
-    useEffect(() => {
-        const status = searchParams.get('status');
-        const message = searchParams.get('message');
-        const error = searchParams.get('error');
-        
-        if (status === 'success' && message) {
-            setStatusMessage({ type: 'success', text: decodeURIComponent(message) });
-        } else if (status === 'error' && message) {
-            setStatusMessage({ type: 'error', text: decodeURIComponent(message) });
-        } else if (status === 'verification-required') {
-            setStatusMessage({ 
-                type: 'warning', 
-                text: 'Please verify your email before logging in.' 
-            });
-        } else if (error) {
-            setStatusMessage({ type: 'error', text: decodeURIComponent(error) });
-        }
-    }, [searchParams]);
-
-    const handleChange = (e) => {
-        const { name, value, type, checked } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: type === 'checkbox' ? checked : value
-        }));
-    };
-
+    const { loginStudent } = useAuth();
+  
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        setFormError("");
+      e.preventDefault();
+      
+      // Validate form
+      if (!email || !password) {
+        setError('Please enter both email and password');
+        return;
+      }
+      
+      try {
+        setLoading(true);
+        setError('');
         
-        // Basic form validation
-        if (!formData.email || !formData.password) {
-            setFormError("Email and password are required");
-            return;
-        }
-
-        try {
-            await loginStudent(formData.email, formData.password);
-            // Login successful - redirect handled in AuthContext
-        } catch (error) {
-            console.error('Login error in component:', error);
-            setFormError(error.message || "Login failed. Please check your credentials.");
-        }
+        // Login with credentials
+        await loginStudent(email, password);
+      } catch (error) {
+        setError(error.message || 'Login failed. Please check your credentials and try again.');
+      } finally {
+        setLoading(false);
+      }
     };
-
-    // Password recovery handler
-    const handleForgotPassword = (e) => {
-        e.preventDefault();
-        const locale = window.location.pathname.split('/')[1];
-        window.location.href = `/${locale}/forgot-password?type=student`;
-    };
-
+    
     return (
         <>
             <div className="bgc-thm4">
@@ -99,13 +63,12 @@ export default function StudentLoginPage() {
                             <div className="col-xl-6 mx-auto">
                                 <div className="log-reg-form search-modal form-style1 bgc-white p50 p30-sm default-box-shadow1 bdrs12">
                                     {/* Status Message (verification success, etc.) */}
-                                    {statusMessage && (
-                                        <div className={`alert ${statusMessage.type === 'success' ? 'alert-success' : 
-                                                               statusMessage.type === 'warning' ? 'alert-warning' : 
-                                                               'alert-danger'} mb-4`}>
-                                            {statusMessage.text}
-                                        </div>
-                                    )}
+                                    {error && (
+                <div className="alert alert-danger" role="alert">
+                  {error}
+                </div>
+              )}
+              
                                 
                                     <div className="mb30">
                                         <h4>Welcome back, student!</h4>
@@ -129,68 +92,63 @@ export default function StudentLoginPage() {
                                         </p>
                                     </div>
                                     
-                                    {/* Error message */}
-                                    {(formError || authError) && (
-                                        <div className="alert alert-danger" role="alert">
-                                            {formError || authError}
-                                        </div>
-                                    )}
+                                
                                     
                                     <form onSubmit={handleSubmit}>
-                                        <div className="mb20">
-                                            <label className="form-label fw600 dark-color">
-                                                Email Address
-                                            </label>
-                                            <input
-                                                type="email"
-                                                className="form-control"
-                                                placeholder="name@example.com"
-                                                name="email"
-                                                value={formData.email}
-                                                onChange={handleChange}
-                                            />
-                                        </div>
-                                        <div className="mb15">
-                                            <label className="form-label fw600 dark-color">
-                                                Password
-                                            </label>
-                                            <input
-                                                type="password"
-                                                className="form-control"
-                                                placeholder="Enter your password"
-                                                name="password"
-                                                value={formData.password}
-                                                onChange={handleChange}
-                                            />
-                                        </div>
+                <div className="mb-3">
+                  <label htmlFor="email" className="form-label">Email</label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </div>
+                
+                <div className="mb-3">
+                  <label htmlFor="password" className="form-label">Password</label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                </div>
                                         <div className="checkbox-style1 d-block d-sm-flex align-items-center justify-content-between mb20">
                                             <label className="custom_checkbox fz14 ff-heading">
                                                 Remember me
                                                 <input
                                                     type="checkbox"
                                                     name="rememberMe"
-                                                    checked={formData.rememberMe}
-                                                    onChange={handleChange}
+                                                   
                                                 />
                                                 <span className="checkmark" />
                                             </label>
                                             <a 
                                                 className="fz14 ff-heading" 
                                                 href="#" 
-                                                onClick={handleForgotPassword}
+                                               
                                             >
                                                 Forgot password?
                                             </a>
                                         </div>
                                         <div className="d-grid mb20">
-                                            <button
-                                                className="ud-btn btn-thm"
-                                                type="submit"
-                                                disabled={loading}
-                                            >
-                                                {loading ? "Logging In..." : "Log In"}{" "}
-                                                <i className="fal fa-arrow-right-long" />
-                                            </button>
+                                        <button 
+                  type="submit" 
+                  className="btn btn-primary w-100"
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <>
+                      <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                      Logging in...
+                    </>
+                  ) : 'Login'}
+                </button>
                                         </div>
                                     </form>
                                     

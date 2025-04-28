@@ -1,76 +1,139 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SelectInput from "../option/SelectInput";
 import Link from "next/link";
 import Image from "next/image";
+import { useAuth } from '@/context/AuthContext';
+import authService from '@/services/authService'; 
 
 export default function ProfileDetails() {
-  const [getHourly, setHourly] = useState({
-    option: "Select",
-    value: null,
-  });
+  const { user, loadUserProfile } = useAuth();
+  // เพิ่มตัวแปรใหม่สำหรับเก็บไฟล์รูปภาพ
+const [selectedImage, setSelectedImage] = useState(null);
+const [selectedImageFile, setSelectedImageFile] = useState(null);
+const [loading, setLoading] = useState(true);
+  
   const [getGender, setGender] = useState({
-    option: "Select",
-    value: null,
+    option: user?.profile?.gerder || "Select",
+    value: user?.profile?.gerder?.toLowerCase() || null,
   });
-  const [getSpecialization, setSpecialization] = useState({
-    option: "Select",
-    value: null,
-  });
-  const [getType, setType] = useState({
-    option: "Select",
-    value: null,
-  });
-  const [getCountry, setCountry] = useState({
-    option: "Select",
-    value: null,
-  });
-  const [getCity, setCity] = useState({
-    option: "Select",
-    value: null,
-  });
-  const [getLanguage, setLanguage] = useState({
-    option: "Select",
-    value: null,
-  });
-  const [getLanLevel, setLanLevel] = useState({
-    option: "Select",
-    value: null,
-  });
-  const [selectedImage, setSelectedImage] = useState(null);
 
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    console.log(event);
+
+// ข้อมูลในฟอร์ม
+const [formData, setFormData] = useState({
+  display_name: user?.profile?.display_name || "",
+  email: user?.email || "",
+  bio: user?.profile?.bio || "",
+  firstName: user?.profile?.first_name || "",
+  lastName: user?.profile?.last_name || "",
+  phone: user?.profile?.phone || ""
+});
+
+  
+  
+   // อัปเดต state เมื่อมีข้อมูลผู้ใช้ใหม่
+   useEffect(() => {
+    if (user) {
+      setFormData({
+        display_name: user.profile?.display_name || "",
+        email: user.email || "",
+        bio: user.profile?.bio || "",
+        firstName: user.profile?.first_name || "",
+        lastName: user.profile?.last_name || "",
+        phone: user.profile?.phone || ""
+      });
+      
+      if (user.profile?.gender) {
+        setGender({
+          option: user.profile.gender,
+          value: user.profile.gender.toLowerCase()
+        });
+      }
+      
+      if (user.profile?.profile_picture) {
+        setSelectedImage(user.profile.profile_picture);
+        setSelectedImageFile(null); // ล้างค่าไฟล์เมื่อโหลดข้อมูลใหม่
+      }
+    }
+  }, [user]);
+
+// แก้ไขฟังก์ชัน handleImageChange
+const handleImageChange = (event) => {
+  const file = event.target.files[0];
+  if (file) {
+    // เก็บไฟล์ไว้สำหรับการอัปโหลด
+    setSelectedImageFile(file);
+    // สร้าง URL สำหรับการแสดงผลในหน้าเว็บ
     setSelectedImage(URL.createObjectURL(file));
-  };
+  }
+};
 
   // handlers
-  const hourlyHandler = (option, value) => {
-    setHourly({ option, value });
+  
+  // จัดการการเปลี่ยนแปลงของ input fields
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
+
+
   const genderHandler = (option, value) => {
     setGender({ option, value });
   };
 
-  const specializationHandler = (option, value) => {
-    setSpecialization({ option, value });
-  };
-  const typeHandler = (option, value) => {
-    setType({ option, value });
-  };
-  const countryHandler = (option, value) => {
-    setCountry({ option, value });
-  };
+
   const cityHandler = (option, value) => {
     setCity({ option, value });
   };
-  const languageHandler = (option, value) => {
-    setLanguage({ option, value });
-  };
-  const lanLevelHandler = (option, value) => {
-    setLanLevel({ option, value });
-  };
+
+//  // บันทึกข้อมูลที่มีการแก้ไข
+//  const handleSubmit = async (e) => {
+//   e.preventDefault();
+  
+
+  
+//   // ถ้ามีการเปลี่ยนรูปภาพ
+//   // ต้องอัปโหลดรูปภาพก่อนแล้วค่อยอัปเดตโปรไฟล์
+  
+//   try {
+//       // เริ่มแสดงสถานะโหลด (ถ้ามี)
+//       setLoading(true);
+    
+//     // ถ้ามีการเปลี่ยนรูปภาพ
+//     let profilePictureUrl = user?.profile?.profile_picture;
+    
+//     if (selectedImageFile) {
+//       // อัปโหลดรูปภาพก่อน
+//       const pictureResult = await authService.uploadProfilePicture(selectedImageFile);
+//       profilePictureUrl = pictureResult.profile_picture || pictureResult.url;
+//     }
+    
+//     const updatedProfile = {
+//     display_name: formData.username,
+//     first_name: formData.firstName,
+//     last_name: formData.lastName,
+//     phone: formData.phone,
+//     gender: getGender.option !== "Select" ? getGender.option : null,
+//     bio: formData.bio
+//     };
+//     // แสดงข้อความเมื่อบันทึกสำเร็จ
+//      // อัปเดตโปรไฟล์
+//      await authService.updateStudentProfile(updatedProfile);
+    
+//      // แสดงข้อความเมื่อบันทึกสำเร็จ
+//      alert("Profile updated successfully");
+     
+//      // อัปเดตข้อมูลผู้ใช้ในระบบ (ถ้ามีฟังก์ชันนี้)
+//      await loadUserProfile(); // ถ้ามีฟังก์ชันนี้ใน useAuth
+     
+//   } catch (error) {
+//     console.error("Failed to update profile:", error);
+//     alert("Failed to update profile. Please try again.");
+//   }
+// };
 
   return (
     <>
@@ -120,17 +183,22 @@ export default function ProfileDetails() {
           </div>
         </div>
         <div className="col-lg-7">
-          <form className="form-style1">
+        <form className="form-style1">
+          {/* <form className="form-style1"  onSubmit={handleSubmit}> */}
             <div className="row">
               <div className="col-sm-6">
                 <div className="mb20">
+                  
                   <label className="heading-color ff-heading fw500 mb10">
-                    Username
+                  Display Name
                   </label>
                   <input
                     type="text"
+                    name="username"
                     className="form-control"
-                    placeholder="username"
+                    placeholder="Display Name"
+                    value={formData.display_name}
+                    onChange={handleInputChange}
                   />
                 </div>
               </div>
@@ -142,7 +210,56 @@ export default function ProfileDetails() {
                   <input
                     type="email"
                     className="form-control"
-                    placeholder="@"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    readOnly // อีเมลไม่ควรเปลี่ยนแปลงได้
+                  />
+                </div>
+              </div>
+              <div className="col-sm-6">
+                <div className="mb20">
+                  <label className="heading-color ff-heading fw500 mb10">
+                    First Name
+                  </label>
+                  <input
+                    type="text"
+                    name="firstName"
+                    className="form-control"
+                    placeholder="First Name"
+                    value={formData.firstName}
+                    onChange={handleInputChange}
+                  />
+                </div>
+              </div>
+              
+              <div className="col-sm-6">
+                <div className="mb20">
+                  <label className="heading-color ff-heading fw500 mb10">
+                    Last Name
+                  </label>
+                  <input
+                    type="text"
+                    name="lastName"
+                    className="form-control"
+                    placeholder="Last Name"
+                    value={formData.lastName}
+                    onChange={handleInputChange}
+                  />
+                </div>
+              </div>
+              
+              <div className="col-sm-6">
+                <div className="mb20">
+                  <label className="heading-color ff-heading fw500 mb10">
+                    Phone
+                  </label>
+                  <input
+                    type="text"
+                    name="phone"
+                    className="form-control"
+                    placeholder="Phone Number"
+                    value={formData.phone}
+                    onChange={handleInputChange}
                   />
                 </div>
               </div>
@@ -165,55 +282,30 @@ export default function ProfileDetails() {
                   />
                 </div>
               </div>
-        
-            
-              <div className="col-sm-6">
-                <div className="mb20">
-                  <SelectInput
-                    label="City"
-                    defaultSelect={getCity}
-                    data={[
-                      {
-                        option: "New York",
-                        value: "new-york",
-                      },
-                      {
-                        option: "Toronto",
-                        value: "toronto",
-                      },
-                      {
-                        option: "London",
-                        value: "london",
-                      },
-                      {
-                        option: "Sydney",
-                        value: "sydney",
-                      },
-                      {
-                        option: "Berlin",
-                        value: "berlin",
-                      },
-                      { option: "Tokyo", value: "tokyo" },
-                    ]}
-                    handler={cityHandler}
-                  />
-                </div>
-              </div>
-             
               <div className="col-md-12">
                 <div className="mb10">
                   <label className="heading-color ff-heading fw500 mb10">
-                    Introduce Yourself
+                    Bio
                   </label>
-                  <textarea cols={30} rows={6} placeholder="Description" />
+                  <textarea 
+                    name="bio"
+                    cols={30} 
+                    rows={6} 
+                    placeholder="Tell us about yourself" 
+                    value={formData.bio}
+                    onChange={handleInputChange}
+                  />
                 </div>
               </div>
+            
+            
+    
               <div className="col-md-12">
                 <div className="text-start">
-                  <Link className="ud-btn btn-thm" href="/contact">
+                <button type="submit" className="ud-btn btn-thm">
                     Save
                     <i className="fal fa-arrow-right-long" />
-                  </Link>
+                  </button>
                 </div>
               </div>
             </div>

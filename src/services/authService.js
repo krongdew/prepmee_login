@@ -1,3 +1,4 @@
+//src\services\authService.js
 import apiClient from '@/lib/axios';
 import { signIn, signOut } from 'next-auth/react';
 
@@ -57,17 +58,40 @@ const authService = {
   
   /**
    * Student Google login
-   * @param {string} credential - Google authentication credential
-   * @returns {Promise} - Authentication result
+ * @param {string} credential - Google JWT credential token
+ * @param {string} clientId - Google Client ID
+ * @returns {Promise} Authentication result
    */
-  async loginStudentGoogle() {
+  async  loginStudentGoogle(credential, clientId) {
     try {
-      const result = await signIn('google', {
-        callbackUrl: '/api/auth/google-callback?role=student',
-        redirect: false
+      // Make a direct request to the API endpoint
+      const response = await fetch(`${API_URL}/auth/member/google-auth`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          credential,
+          client_id: clientId
+        })
       });
+  
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to authenticate with Google');
+      }
+  
+      const data = await response.json();
       
-      return result;
+      // Store tokens if authentication was successful
+      if (data.result && data.result.accessToken) {
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('accessToken', data.result.accessToken);
+          localStorage.setItem('refreshToken', data.result.refreshToken || '');
+        }
+      }
+      
+      return data;
     } catch (error) {
       console.error('Student Google login error:', error);
       throw error;
@@ -75,23 +99,46 @@ const authService = {
   },
   
   /**
-   * Tutor Google login
-   * @param {string} credential - Google authentication credential
-   * @returns {Promise} - Authentication result
-   */
-  async loginTutorGoogle() {
-    try {
-      const result = await signIn('google', {
-        callbackUrl: '/api/auth/google-callback?role=tutor',
-        redirect: false
-      });
-      
-      return result;
-    } catch (error) {
-      console.error('Tutor Google login error:', error);
-      throw error;
+ * Authenticate with Google for tutors
+ * @param {string} credential - Google JWT credential token
+ * @param {string} clientId - Google Client ID
+ * @returns {Promise} Authentication result
+ */
+async  loginTutorGoogle(credential, clientId) {
+  try {
+    // Make a direct request to the API endpoint
+    const response = await fetch(`${API_URL}/auth/tutor/google-auth`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        credential,
+        client_id: clientId
+      })
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Failed to authenticate with Google');
     }
-  },
+
+    const data = await response.json();
+    
+    // Store tokens if authentication was successful
+    if (data.result && data.result.accessToken) {
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('accessToken', data.result.accessToken);
+        localStorage.setItem('refreshToken', data.result.refreshToken || '');
+      }
+    }
+    
+    return data;
+  } catch (error) {
+    console.error('Tutor Google login error:', error);
+    throw error;
+  }
+},
   
   /**
    * Student registration
@@ -163,6 +210,38 @@ const authService = {
     }
   },
   
+
+  
+// ฟังก์ชันอัปเดตโปรไฟล์นักเรียน
+async updateStudentProfile(profileData) {
+  try {
+    const response = await apiClient.put('/auth/member/me', profileData);
+    return response.data.result || response.data.data || response.data;
+  } catch (error) {
+    console.error('Update student profile error:', error);
+    throw error;
+  }
+},
+
+// ฟังก์ชันอัปโหลดรูปโปรไฟล์
+async uploadProfilePicture(file) {
+  try {
+    const formData = new FormData();
+    formData.append('profile_picture', file);
+    
+    const response = await apiClient.post('/auth/member/me', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    
+    return response.data.result || response.data.data || response.data;
+  } catch (error) {
+    console.error('Upload profile picture error:', error);
+    throw error;
+  }
+},
+
   /**
    * Get tutor profile
    * @returns {Promise} - Tutor profile data

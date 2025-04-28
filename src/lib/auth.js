@@ -95,8 +95,8 @@ export const authOptions = {
     
     // Google Provider (ถ้าต้องการใช้)
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID || "684610343882-n2u6lf9lfl4mjjcb6jlplssd2r640p37.apps.googleusercontent.com",
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       profile(profile) {
         return {
           id: profile.sub,

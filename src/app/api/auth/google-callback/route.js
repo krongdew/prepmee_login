@@ -1,3 +1,4 @@
+//src\app\api\auth\google-callback\route.js
 import { NextResponse } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 import axios from 'axios';

@@ -48,7 +48,7 @@ export default function MobileNavigation2() {
                     <Link href={`/${currentLocale}/login`}>join</Link>
                   ) : (
                     <span className="text-primary me-2" style={{ fontSize: '14px' }}>
-                      {user?.firstname || 'User'}
+                      {user?.profile?.first_name || 'User'}
                     </span>
                   )}
                   <a
@@ -102,7 +102,7 @@ export default function MobileNavigation2() {
         <div className="offcanvas-body">
           {isAuthenticated && (
             <div className="user-info p-3 mb-3 bg-light rounded">
-              <div className="fw-bold">{user?.firstname} {user?.lastname}</div>
+              <div className="fw-bold">{user?.profile?.display_name}</div>
               <div className="small text-muted">{user?.email}</div>
             </div>
           )}

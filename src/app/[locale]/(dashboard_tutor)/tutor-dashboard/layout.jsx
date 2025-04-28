@@ -2,6 +2,7 @@
 
 import ProtectedRoute from '@/components/auth/ProtectedRoute';
 import DashboardLayout from '@/components/dashboard/DashboardLayout';
+import MobileNavigation2 from "@/components/header/MobileNavigation2";
 
 /**
  * Tutor Dashboard Layout
@@ -10,6 +11,7 @@ import DashboardLayout from '@/components/dashboard/DashboardLayout';
 export default function TutorDashboardLayout({ children }) {
   return (
     <ProtectedRoute requiredRole="tutor">
+      <MobileNavigation2 />
       <DashboardLayout>
         {children}
       </DashboardLayout>
